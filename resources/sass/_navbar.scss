@@ -1,0 +1,77 @@
+// @font-face 
+// {
+//     font-family:"Vivaldi";
+//      src: url("./fonts/vivaldi.ttf") format("truetype");
+// }
+
+.navContainer
+{
+    position: relative;
+    display: flex; 
+    width: 1364px;
+    height: 65px;
+    background-color: #FFB101;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 35px;
+    border: 1px solid white;
+}
+
+.logo
+{
+    align-self: center;
+}
+.logo_name
+{    
+    font-family: 'Vivaldi', italic;
+    font-size: 50px;
+    color: black;
+    left: 50px;
+    position: relative;
+}
+
+.logo_img
+{
+    position: relative;
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    left: 30px;
+}
+
+.welcomeText
+{
+    margin: auto;
+}
+
+.buttons
+{
+    width: 380px;
+    position: relative;
+    display: flex;
+    right: 10px;
+}
+
+.buttons a
+{
+    text-decoration: none;
+    height: 37px;
+    width: 118px;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    position: relative;
+    align-self: center;
+    vertical-align: middle;  
+    text-align: center;  
+    margin: auto;
+    font-family: 'Sitka Banner', italic;
+    font-size: 20px;
+    border: 1px solid #707070;
+}
+
+.buttons a span
+{
+    position: relative;
+    top: 3px;
+}
