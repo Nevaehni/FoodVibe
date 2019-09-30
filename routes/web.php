@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::resource('/home', 'HomeController');
+
+//Axios calls from Vue
 Route::get('/restaurants', 'HomeController@restaurants')->name('restaurants.data');
+Route::get('/authCheck', 'HomeController@authCheck')->name('auth.check');

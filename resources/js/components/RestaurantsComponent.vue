@@ -92,7 +92,7 @@ export default {
         .then(response => 
         {
             this.restaurants = response.data;
-            console.log(this.restaurants);			
+            // console.log(this.restaurants);			
         })
         .catch(err => 
         {

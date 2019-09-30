@@ -16,7 +16,6 @@ class Consumables extends Migration
         Schema::create('consumables', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('price');
             $table->string('category');
             $table->string('image');
             $table->timestamps();

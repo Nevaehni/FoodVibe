@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    {{-- Site logo in the tab --}}
+    <link rel="shortcut icon" href="./images/logo/logo.png">
 </head>
 <body>
     <div id="app">
@@ -71,6 +74,10 @@
                 </div>
             </div>
         </nav> --}}
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
 
         @yield('content')
       
