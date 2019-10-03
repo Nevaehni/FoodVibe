@@ -8,16 +8,16 @@ class Restaurant extends Model
 {
     public function User()
     {
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function Restaurant_consumables()
     {
-        $this->hasMany('App\Restaurant_consumable');
+        return $this->hasMany('App\Restaurant_consumable');
     }
 
     public function Orders()
     {
-        $this->hasMany('App\Order');
+        return $this->hasMany('App\Order');
     }
 }

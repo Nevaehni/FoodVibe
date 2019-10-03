@@ -8,11 +8,11 @@ class Consumable_order extends Model
 {
     public function Consumables()
     {
-        $this->belongsTo('App\Consumable');
+        return $this->belongsTo('App\Consumable');
     }
 
     public function Orders()
     {
-        $this->belongsTo('App\Order');
+        return $this->belongsTo('App\Order');
     }
 }

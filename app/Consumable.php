@@ -8,11 +8,11 @@ class Consumable extends Model
 {
     public function Restaurant_consumables()
     {
-        $this->belongsToMany('App\Restaurant_consumable');
+        return $this->belongsToMany('App\Restaurant_consumable');
     }
 
     public function Consumable_orders()
     {
-        $this->hasMany('App\Consumable_order');
+        return $this->hasMany('App\Consumable_order');
     }
 }

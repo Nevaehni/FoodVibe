@@ -16,18 +16,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-    }
-
-    public function restaurants()
-    {
-        return Restaurant::all();
-    }  
+    }    
 
     public function authCheck()
     {
         return Auth::user();
     }   
-
-
 
 }

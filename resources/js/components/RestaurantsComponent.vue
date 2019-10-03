@@ -22,8 +22,8 @@
     top: 5px;
     border-radius: 20px;
     display: flex;
-    cursor: pointer;
     border: 1px solid #707070;
+    text-decoration: none;
 }
 
 .contentContainer img
@@ -66,14 +66,14 @@
 
 <template>
     <div class="mainContainer"> 
-        <div class="contentContainer" v-for="(rest,id) in restaurants" :key="id">
+        <a :href="'restaurant/'+rest.id" class="contentContainer" v-for="(rest,id) in restaurants" :key="id">
             <img :src="'./images/restaurants/'+rest.image" alt="Restaurant logo">
             <div class="title">
                 <span>{{rest.title}}</span>
                 <div class="divider"></div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
             </div>        
-        </div>
+        </a>
     </div>
 </template>
 
@@ -91,8 +91,7 @@ export default {
         axios.get('restaurants')
         .then(response => 
         {
-            this.restaurants = response.data;
-            // console.log(this.restaurants);			
+            this.restaurants = response.data;			
         })
         .catch(err => 
         {
