@@ -2026,6 +2026,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     restaurant: String
@@ -6721,7 +6772,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 1;\r\n      color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\r\n", ""]);
+exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 1;\r\n      color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    width: 1100px;\r\n    right: -8.5%;\n}\n.category[data-v-78e2f7b6]{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n};\r\n\r\n", ""]);
 
 // exports
 
@@ -38513,52 +38564,130 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "mainContainer" },
-      [
-        _c("div", { staticClass: "contentContainer" }, [
-          _c("img", {
-            attrs: {
-              src: "../images/restaurants/" + this.consumables.image,
-              alt: "Restaurant logo"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "title" }, [
-            _c("span", [_vm._v(_vm._s(this.consumables.title))]),
-            _vm._v(" "),
-            _c("div", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?"
-              )
-            ])
-          ])
-        ]),
+    _c("div", { staticClass: "mainContainer" }, [
+      _c("div", { staticClass: "contentContainer" }, [
+        _c("img", {
+          attrs: {
+            src: "../images/restaurants/" + this.consumables.image,
+            alt: "Restaurant logo"
+          }
+        }),
         _vm._v(" "),
-        _vm._l(_vm.consumables.restaurant_consumables, function(con, id) {
-          return _c("div", { key: id, staticClass: "contentContainer" }, [
-            _c("img", {
-              attrs: {
-                src: "../images/consumables/" + con.consumable.image,
-                alt: "Restaurant logo"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "title" }, [
-              _c("span", [_vm._v(_vm._s(con.consumable.title))]),
-              _vm._v(" "),
-              _c("div", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s("Category: " + con.category))])
-            ])
+        _c("div", { staticClass: "title" }, [
+          _c("span", [_vm._v(_vm._s(this.consumables.title))]),
+          _vm._v(" "),
+          _c("div", { staticClass: "divider" }),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?"
+            )
           ])
-        })
-      ],
-      2
-    )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "foodContainer" },
+        [
+          _c("span", { staticClass: "category" }, [_vm._v("Main courses")]),
+          _vm._v(" "),
+          _vm._l(_vm.consumables.restaurant_consumables, function(con, id) {
+            return con.category == "main course"
+              ? _c("div", { key: id, staticClass: "foodContent" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "../images/consumables/" + con.consumable.image,
+                      alt: "Restaurant logo"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "title" }, [
+                    _c("span", [_vm._v(_vm._s(con.consumable.title))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "divider" }),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Category: " + con.category))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Price: €" + con.price))]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "" } }, [_vm._v("+")])
+                  ])
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "foodContainer" },
+        [
+          _c("span", { staticClass: "category" }, [_vm._v("Side dishes")]),
+          _vm._v(" "),
+          _vm._l(_vm.consumables.restaurant_consumables, function(con, id) {
+            return con.category == "side dish"
+              ? _c("div", { key: id }, [
+                  _c("img", {
+                    attrs: {
+                      src: "../images/consumables/" + con.consumable.image,
+                      alt: "Restaurant logo"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "title" }, [
+                    _c("span", [_vm._v(_vm._s(con.consumable.title))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "divider" }),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Category: " + con.category))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Price: €" + con.price))]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "" } }, [_vm._v("+")])
+                  ])
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "foodContainer" },
+        [
+          _c("span", { staticClass: "category" }, [_vm._v("Drinks")]),
+          _vm._v(" "),
+          _vm._l(_vm.consumables.restaurant_consumables, function(con, id) {
+            return con.category == "drink"
+              ? _c("div", { key: id }, [
+                  _c("img", {
+                    attrs: {
+                      src: "../images/consumables/" + con.consumable.image,
+                      alt: "Restaurant logo"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "title" }, [
+                    _c("span", [_vm._v(_vm._s(con.consumable.title))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "divider" }),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Category: " + con.category))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s("Price: €" + con.price))]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "" } }, [_vm._v("+")])
+                  ])
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = []

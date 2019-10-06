@@ -33,5 +33,35 @@ class ConsumablesTableSeeder extends Seeder
             'category' => 'drink',
             'image' => 'fanta.png',
         ]);
+
+        DB::table('consumables')->insert([
+            'title' => 'Kebab',
+            'category' => 'main course',
+            'image' => 'kebab.webp',
+        ]);
+
+        DB::table('consumables')->insert([
+            'title' => 'Yaprak Sarma',
+            'category' => 'main course',
+            'image' => 'sarma.png',
+        ]);
+
+        DB::table('consumables')->insert([
+            'title' => 'Kurufasulye',
+            'category' => 'main course',
+            'image' => 'kurufasulye.png',
+        ]);
+
+        DB::table('consumables')->insert([
+            'title' => 'Corn Salad',
+            'category' => 'side dish',
+            'image' => 'corn.png',
+        ]);
+
+        DB::table('consumables')->insert([
+            'title' => 'Manti',
+            'category' => 'side dish',
+            'image' => 'manti.png',
+        ]);
     }
 }

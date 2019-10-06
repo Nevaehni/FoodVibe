@@ -16,7 +16,7 @@ class RestaurantConsumables extends Migration
         Schema::create('restaurant_consumables', function (Blueprint $table) {           
             $table->integer('restaurant_id');
             $table->integer('consumable_id');
-            $table->integer('price');
+            $table->double('price');
             $table->string('category');
             $table->timestamps();
         });

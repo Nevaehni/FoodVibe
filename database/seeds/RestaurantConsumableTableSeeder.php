@@ -23,17 +23,54 @@ class RestaurantConsumableTableSeeder extends Seeder
             'price' => '2.15',
             'category' => Consumable::find(1)->category
         ]);
+
         DB::table('restaurant_consumables')->insert([
             'restaurant_id' => '1',
             'consumable_id' => '2',
             'price' => '1.95',
             'category' =>  Consumable::find(2)->category
         ]);
+
         DB::table('restaurant_consumables')->insert([
             'restaurant_id' => '1',
             'consumable_id' => '3',
             'price' => '2.10',
             'category' => Consumable::find(3)->category
+        ]);
+
+        DB::table('restaurant_consumables')->insert([
+            'restaurant_id' => '1',
+            'consumable_id' => '4',
+            'price' => '2.12',
+            'category' => Consumable::find(4)->category
+        ]);
+
+        DB::table('restaurant_consumables')->insert([
+            'restaurant_id' => '1',
+            'consumable_id' => '5',
+            'price' => '2.15',
+            'category' => Consumable::find(5)->category
+        ]);
+
+        DB::table('restaurant_consumables')->insert([
+            'restaurant_id' => '1',
+            'consumable_id' => '6',
+            'price' => '2.16',
+            'category' => Consumable::find(6)->category
+        ]);
+
+        DB::table('restaurant_consumables')->insert([
+            'restaurant_id' => '1',
+            'consumable_id' => '7',
+            'price' => '2.17',
+            'category' => Consumable::find(7)->category
+        ]);
+
+        DB::table('restaurant_consumables')->insert([
+            'restaurant_id' => '1',
+            'consumable_id' => '8',
+            'price' => '2.18',
+            'category' => Consumable::find(8)->category
         ]);
     }
 }

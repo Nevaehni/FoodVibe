@@ -12,7 +12,7 @@
     border: 1px solid white;
 }
 
-.contentContainer
+.contentContainer, .foodContainer
 {
     width: 1333px;
     height: 203px;    
@@ -26,7 +26,7 @@
     text-decoration: none;
 }
 
-.contentContainer img
+.contentContainer img, .foodContainer img
 {
     border-radius: 12px;   
     height: 181px;
@@ -62,6 +62,25 @@
     width: 100%;
     border: 1px solid #707070;
 }
+
+.foodContainer
+{
+    height: auto;
+    width: 1100px;
+    right: -8.5%;   
+}
+
+.category{
+    background-color: black;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding: 13px;
+    width: auto;
+    min-width: 110px;
+    color: white;
+    font-family: "Sitka Banner", italic;
+};
+
 </style>
 
 <template>
@@ -75,17 +94,49 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
                 </div>    
             </div>
-            <div class="contentContainer" v-for="(con,id) in consumables.restaurant_consumables" :key="id">
-                 <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
-                <div class="title">
-                    <span>{{con.consumable.title}}</span>
-                    <div class="divider"></div>
-                    <p>{{"Category: "+con.category}}</p>
-                </div>    
+            <div class="foodContainer">     
+                <span class="category">Main courses</span>         
+                <div class="foodContent" v-if="con.category == 'main course'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
+                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                    <div class="title">
+                        <span>{{con.consumable.title}}</span>
+                        <div class="divider"></div>
+                        <p>{{"Category: "+con.category}}</p>
+                        <p>{{"Price: €"+con.price}}</p>
+                        <a href="">+</a>
+                    </div>   
+                </div> 
             </div>
-        </div>         
-       
-    </div>
+
+            <div class="foodContainer">
+                <span class="category">Side dishes</span>         
+                <div v-if="con.category == 'side dish'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
+                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                    <div class="title">
+                        <span>{{con.consumable.title}}</span>
+                        <div class="divider"></div>
+                        <p>{{"Category: "+con.category}}</p>
+                        <p>{{"Price: €"+con.price}}</p>
+                        <a href="">+</a>
+                    </div>   
+                </div> 
+            </div>
+            
+            <div class="foodContainer">
+                <span class="category">Drinks</span>         
+                <div v-if="con.category == 'drink'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
+                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                    <div class="title">
+                        <span>{{con.consumable.title}}</span>
+                        <div class="divider"></div>
+                        <p>{{"Category: "+con.category}}</p>
+                        <p>{{"Price: €"+con.price}}</p>
+                        <a href="">+</a>
+                    </div>   
+                </div>
+            </div> 
+        </div>
+    </div>  
 </template>
 
 <script>
