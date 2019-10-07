@@ -2,11 +2,10 @@
     <div>
         <nav class="navContainer">
             <div class="logo">
-                <span class="logo_name">FoodVibe</span>   
-                <img class="logo_img" :src="'./images/logo/logo.png'" alt="">
+                <span class="logo_name" >FoodVibe</span>   
+                <img class="logo_img" :src="imgAsset+'/logo/logo.png'" alt="">
             </div>    
-            <h3 v-if="user" class="welcomeText">Welcome {{userData.name}}</h3>
-            <h3 v-else class="welcomeText">Welcome guest!</h3>
+            <h3 class="welcomeText">Welcome {{userData.name}}</h3>
 
             <div class="buttons">        
                 <a href="#"><span>Basket</span></a>
@@ -17,7 +16,7 @@
         </nav>
         
         <!--login form -->   
-        <form v-if="loginShow" method="POST" action="login" id="login_form">      
+        <form v-if="loginShow" method="POST" :action="loginRoute" id="login_form">      
             <input type="hidden" name="_token" :value="csrfToken">     
             <a id="close_btn" onclick="event.preventDefault();" @click="toggle()" href="#">X</a>       
             <div class="email_div">
@@ -54,24 +53,30 @@ export default {
         return{
             //User
             user: false,
-            userData: {},
+            userData: {name: 'guest'},
 
             //Login
             loginShow: false,
             csrfToken: null,
         }
     },
+    props: 
+    {
+        route: { type: String, required: true },
+        imgAsset: String,
+        loginRoute: String
+    },
     created()
     {
+        console.log(this.loginRoute)
         //Check if user is logged in
-        axios.get('authCheck')
+        axios.get(this.route)
         .then(response => 
         {
             if(typeof response.data === 'object')
             {
                 this.user = true;
                 this.userData = response.data;
-                console.log(response.data);
             }
             else
             {

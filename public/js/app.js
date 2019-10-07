@@ -1888,27 +1888,36 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //User
       user: false,
-      userData: {},
+      userData: {
+        name: 'guest'
+      },
       //Login
       loginShow: false,
       csrfToken: null
     };
   },
+  props: {
+    route: {
+      type: String,
+      required: true
+    },
+    imgAsset: String,
+    loginRoute: String
+  },
   created: function created() {
     var _this = this;
 
-    //Check if user is logged in
-    axios.get('authCheck').then(function (response) {
+    console.log(this.loginRoute); //Check if user is logged in
+
+    axios.get(this.route).then(function (response) {
       if (_typeof(response.data) === 'object') {
         _this.user = true;
         _this.userData = response.data;
-        console.log(response.data);
       } else {
         _this.user = false;
       }
@@ -1992,100 +2001,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    restaurant: String
-  },
   data: function data() {
     return {
       consumables: [],
       id: this.restaurant
     };
+  },
+  props: {
+    restaurant: Number
   },
   created: function created() {
     var _this = this;
@@ -2125,86 +2049,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      restaurants: []
+      restaurants: [],
+      restaurantStatus: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('restaurants').then(function (response) {
-      _this.restaurants = response.data;
+      _this.restaurants = response.data.restaurant;
+      _this.restaurantStatus = response.data.time;
     })["catch"](function (err) {
       console.log('My error' + err);
-    });
+    }); //    console.log(this.restaurantStatus.findIndex(2));
   },
-  methods: {}
+  methods: {// findRestaurantIndex : function(id)
+    // {
+    //    return this.restaurantStatus.filter(function( obj ) {   
+    //         console.log((+obj.id === +id))
+    //     })[ 0 ];         
+    // }
+  }
 });
 
 /***/ }),
@@ -2229,70 +2097,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  props: {
+    searchRoute: String,
+    bladeToken: String
+  },
+  created: function created() {
+    console.log(this.searchRoute);
+    console.log(this.bladeToken);
+  },
+  methods: {
+    //Search
+    search: function search(data) {
+      //Check if input is empty and empty searchResults div
+      if ($.trim(data.target.value).length == 0) {
+        $('searchResults').empty();
+      }
+
+      axios.post(this.searchRoute, {
+        input: data.target.value,
+        _token: this.bladeToken
+      }).then(function (response) {
+        $('#searchResults').html(response.data);
+        console.log(response.data);
+      })["catch"](function (err) {
+        console.log("--MY ERROR: " + err);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -6772,7 +6608,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 1;\r\n      color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    width: 1100px;\r\n    right: -8.5%;\n}\n.category[data-v-78e2f7b6]{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n};\r\n\r\n", ""]);
+exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 5;\r\n    color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.title a[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    width: 1100px;\r\n    right: -8.5%;\n}\n.category[data-v-78e2f7b6]\r\n{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -6791,7 +6627,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mainContainer[data-v-b236339c]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-b236339c]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-b236339c]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-b236339c]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 1;\r\n      color: #707070;\n}\n.title span[data-v-b236339c]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-b236339c]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.divider[data-v-b236339c]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\r\n", ""]);
+exports.push([module.i, "\n.mainContainer[data-v-b236339c]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-b236339c]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-b236339c]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-b236339c]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 1;\r\n      color: #707070;\n}\n.title span[data-v-b236339c]\r\n{\r\n    font-size: 30px;\n}\n.title span[data-v-b236339c]:nth-of-type(2) \r\n{\r\n    float:right;\n}\n.title p[data-v-b236339c]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.divider[data-v-b236339c]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\r\n", ""]);
 
 // exports
 
@@ -6810,7 +6646,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mainContainer[data-v-89b0c3cc]\r\n{\r\n    position: relative;  \r\n    width: 1364px;\r\n    height: 65px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    border-radius: 35px;\r\n    border: 1px solid white;\r\n    display: flex;\n}\n.mainContainer input[data-v-89b0c3cc]\r\n{\r\n    height: 35px;\r\n    align-self: center;\r\n    border-radius: 30px;\r\n    border: 1px solid #707070;\r\n    outline-width: 0;\r\n    padding: 10px;\n}\n.mainContainer input[data-v-89b0c3cc]:first-child\r\n{    \r\n    flex: 7;\r\n    margin: 0px 0px 0px 10px;\n}\n.mainContainer input[data-v-89b0c3cc]:nth-child(2)\r\n{    \r\n    flex: 1;\r\n    margin: 0px 15px 0px 10px;\n}\n.mainContainer div[data-v-89b0c3cc]\r\n{\r\n    height: 37px;\r\n    width: 118px;\r\n    border-radius: 20px;\r\n    background-color: black;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;  \r\n    text-align: center;  \r\n    margin: 0px 15px 0px 0px;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\n}\na[data-v-89b0c3cc]\r\n{\r\n    text-decoration: none;\n}\n.searchA span[data-v-89b0c3cc]\r\n{    \r\n    position: relative;\r\n    top: 3px;\r\n    color: white;\n}\r\n", ""]);
+exports.push([module.i, "\n#searchResults[data-v-89b0c3cc]\r\n{\r\n    overflow: hidden;\r\n    position: absolute;\r\n    background: white;\r\n    top: 50px;\r\n    left: 11px;\r\n    height: auto;\r\n    width: 1030px;\r\n    border-radius: 35px;\r\n    z-index: 6;\r\n    border: unset;\n}\n.mainContainer[data-v-89b0c3cc]\r\n{\r\n    position: relative;  \r\n    width: 1364px;\r\n    height: 65px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    border-radius: 35px;\r\n    border: 1px solid white;\r\n    display: flex;\n}\n.mainContainer input[data-v-89b0c3cc]\r\n{\r\n    height: 35px;\r\n    align-self: center;\r\n    border-radius: 30px;\r\n    border: 1px solid #707070;\r\n    outline-width: 0;\r\n    padding: 10px;\n}\n.mainContainer input[data-v-89b0c3cc]:first-child\r\n{    \r\n    flex: 7;\r\n    margin: 0px 0px 0px 10px;\n}\n.mainContainer input[data-v-89b0c3cc]:nth-child(2)\r\n{    \r\n    flex: 1;\r\n    margin: 0px 15px 0px 10px;\n}\n.mainContainer div[data-v-89b0c3cc]\r\n{\r\n    height: 37px;\r\n    width: 118px;\r\n    border-radius: 20px;\r\n    background-color: black;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;  \r\n    text-align: center;  \r\n    margin: 0px 15px 0px 0px;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\n}\na[data-v-89b0c3cc]\r\n{\r\n    text-decoration: none;\n}\n.searchA span[data-v-89b0c3cc]\r\n{    \r\n    position: relative;\r\n    top: 3px;\r\n    color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -38389,15 +38225,13 @@ var render = function() {
         _vm._v(" "),
         _c("img", {
           staticClass: "logo_img",
-          attrs: { src: "./images/logo/logo.png", alt: "" }
+          attrs: { src: _vm.imgAsset + "/logo/logo.png", alt: "" }
         })
       ]),
       _vm._v(" "),
-      _vm.user
-        ? _c("h3", { staticClass: "welcomeText" }, [
-            _vm._v("Welcome " + _vm._s(_vm.userData.name))
-          ])
-        : _c("h3", { staticClass: "welcomeText" }, [_vm._v("Welcome guest!")]),
+      _c("h3", { staticClass: "welcomeText" }, [
+        _vm._v("Welcome " + _vm._s(_vm.userData.name))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
         _vm._m(0),
@@ -38434,7 +38268,9 @@ var render = function() {
     _vm.loginShow
       ? _c(
           "form",
-          { attrs: { method: "POST", action: "login", id: "login_form" } },
+          {
+            attrs: { method: "POST", action: _vm.loginRoute, id: "login_form" }
+          },
           [
             _c("input", {
               attrs: { type: "hidden", name: "_token" },
@@ -38734,6 +38570,10 @@ var render = function() {
           _c("div", { staticClass: "title" }, [
             _c("span", [_vm._v(_vm._s(rest.title))]),
             _vm._v(" "),
+            _vm.restaurantStatus[rest.id].status == "closed"
+              ? _c("span", [_vm._v("Closed")])
+              : _c("span", [_vm._v("Open")]),
+            _vm._v(" "),
             _c("div", { staticClass: "divider" }),
             _vm._v(" "),
             _c("p", [
@@ -38770,22 +38610,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "mainContainer" }, [
+    _c("input", {
+      attrs: { id: "searchBar", type: "text" },
+      on: {
+        input: function($event) {
+          return _vm.search($event)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "searchResults" } }),
+    _vm._v(" "),
+    _c("input", { attrs: { type: "text", placeholder: "Zipcode.." } }),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mainContainer" }, [
-      _c("input", { attrs: { type: "text", placeholder: "The Noodle Bar.." } }),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text", placeholder: "Zipcode.." } }),
-      _vm._v(" "),
-      _c("div", [
-        _c("a", { staticClass: "searchA", attrs: { href: "tester" } }, [
-          _c("span", [_vm._v("Search")])
-        ])
+    return _c("div", [
+      _c("a", { staticClass: "searchA", attrs: { href: "tester" } }, [
+        _c("span", [_vm._v("Search")])
       ])
     ])
   }

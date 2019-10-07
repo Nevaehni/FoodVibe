@@ -4,12 +4,45 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Restaurant_schedule;
+use DateTime;
+use Carbon\Carbon;
 
 class RestaurantController extends Controller
 {
     public function restaurants()
-    {
-        return Restaurant::all();
+    {       
+        $storeSchedule = Restaurant_schedule::where('open_time', '<=', date('Y-m-d H:i:s'))->get();
+       
+        //Current UNIX timestamp
+        $timestamp = time();      
+        
+        //Get current time object
+        $currentTime = (new DateTime())->setTimestamp($timestamp);
+         
+        //Array with the data
+        $status = []; 
+
+        // loop through time ranges for current day
+        foreach ($storeSchedule as $s) {
+                     
+            // create time objects from start/end times
+            $startTime = DateTime::createFromFormat('Y-m-d H:i:s', $s->open_time);
+            $endTime   = DateTime::createFromFormat('Y-m-d H:i:s', $s->close_time);
+                       
+            // check if current time is within a range
+            if (($startTime < $currentTime) && ($currentTime < $endTime)) 
+            {
+                $status[$s->restaurant_id] = ['status' => 'open'];
+            }
+            else
+            {
+                $status[$s->restaurant_id] = ['status' => 'closed'];
+            }  
+        }
+
+        return ['restaurant' => Restaurant::all(), 'time' => $status];
+
     }  
 
     public function restaurantPage($id)

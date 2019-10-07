@@ -23,8 +23,10 @@ Route::resource('/home', 'HomeController');
 //Restaurant
 Route::get('/restaurants', 'RestaurantController@restaurants')->name('restaurants.data');
 Route::get('/restaurant/{id}', 'RestaurantController@restaurantPage')->name('restaurant.page');
-Route::get('restaurant/consumables/{id}', 'RestaurantController@consumables')->name('consumables.page');
+Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->name('consumables.page');
 
-
-
+//Navigation Authcheck
 Route::get('/authCheck', 'HomeController@authCheck')->name('auth.check');
+
+//Searchbar
+Route::post('/search', 'HomeController@restaurantSearch')->name('restaurant.search');

@@ -1,3 +1,48 @@
+<template>
+    <div class="mainContainer"> 
+        <a :href="'restaurant/'+rest.id" class="contentContainer" v-for="(rest,id) in restaurants" :key="id">
+            <img :src="'./images/restaurants/'+rest.image" alt="Restaurant logo">   
+            <div class="title">
+                <span>{{rest.title}}</span>
+                <span v-if="restaurantStatus[rest.id].status == 'closed'">Closed</span>
+                <span v-else>Open</span>
+                <div class="divider"></div> 
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
+            </div>        
+        </a>
+    </div>
+</template>
+
+<script>
+export default {   
+    data() 
+    {
+        return{
+            restaurants: [],         
+            restaurantStatus: []         
+        }
+    },  
+
+    created()
+    {           
+        axios.get('restaurants')
+        .then(response => 
+        {
+            this.restaurants = response.data.restaurant;			
+            this.restaurantStatus = response.data.time;	
+        })
+        .catch(err => 
+        {
+            console.log('My error'+err);
+        })     
+
+    },
+    methods: {
+        
+    }   
+}
+</script>
+
 <style scoped>
 .mainContainer
 {
@@ -51,6 +96,11 @@
     font-size: 30px;
 }
 
+.title span:nth-of-type(2) 
+{
+    float:right;
+}
+
 .title p
 {
     font-size: 15px;
@@ -63,44 +113,3 @@
     border: 1px solid #707070;
 }
 </style>
-
-<template>
-    <div class="mainContainer"> 
-        <a :href="'restaurant/'+rest.id" class="contentContainer" v-for="(rest,id) in restaurants" :key="id">
-            <img :src="'./images/restaurants/'+rest.image" alt="Restaurant logo">
-            <div class="title">
-                <span>{{rest.title}}</span>
-                <div class="divider"></div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
-            </div>        
-        </a>
-    </div>
-</template>
-
-<script>
-export default {   
-    data() 
-    {
-        return{
-            restaurants: []         
-        }
-    },  
-
-    created()
-    {      
-        axios.get('restaurants')
-        .then(response => 
-        {
-            this.restaurants = response.data;			
-        })
-        .catch(err => 
-        {
-            console.log('My error'+err);
-        })
-       
-    },
-    methods: {
-        
-    }
-}
-</script>

@@ -24,7 +24,7 @@ class RestaurantsTableSeeder extends Seeder
             'city' => 'amsterdam',
             'phone' => '0612345678',
             'email' => 'thenoodlebar@talnet.nl',
-            'user_id' => '2'
+            'user_id' => '2',
         ]);
 
         DB::table('restaurants')->insert([

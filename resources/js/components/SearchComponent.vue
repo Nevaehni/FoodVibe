@@ -1,4 +1,79 @@
+<template>
+    <div class="mainContainer">
+        <input v-on:input="search($event)" id="searchBar" type="text">
+        <div id="searchResults"></div>
+        <input type="text" placeholder="Zipcode..">
+        <div>
+            <a class="searchA" href="tester"><span>Search</span></a>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data()
+    {
+        return{
+      
+        }
+    },
+    props:
+    {
+        searchRoute: String,
+        bladeToken: String,
+
+    },
+    created()
+    {
+        console.log(this.searchRoute)
+        console.log(this.bladeToken)
+    },
+
+    methods:
+    {
+        //Search
+        search: function(data)
+        {    
+            //Check if input is empty and empty searchResults div
+            if( $.trim( data.target.value ).length == 0)
+            {
+               $('searchResults').empty();
+            }
+            
+            axios.post(this.searchRoute, {
+                input: data.target.value,
+                _token: this.bladeToken
+            })
+            .then(response => 
+            {    
+                $('#searchResults').html(response.data);  
+                console.log(response.data)                                 
+            })
+            .catch(err =>{
+                console.log("--MY ERROR: "+err)
+            });                  
+        }
+    }  
+    
+}
+</script>
+
 <style scoped>
+
+#searchResults
+{
+    overflow: hidden;
+    position: absolute;
+    background: white;
+    top: 50px;
+    left: 11px;
+    height: auto;
+    width: 1030px;
+    border-radius: 35px;
+    z-index: 6;
+    border: unset;
+}
+
 .mainContainer
 {
     position: relative;  
@@ -21,6 +96,7 @@
     outline-width: 0;
     padding: 10px;
 }
+
 .mainContainer input:first-child
 {    
     flex: 7;
@@ -61,19 +137,3 @@ a
     color: white;
 }
 </style>
-
-<template>
-    <div class="mainContainer">
-        <input type="text" placeholder="The Noodle Bar..">
-        <input type="text" placeholder="Zipcode..">
-        <div>
-            <a class="searchA" href="tester"><span>Search</span></a>
-        </div>
-    </div>
-</template>
-
-<script>
-export default {
-    
-}
-</script>

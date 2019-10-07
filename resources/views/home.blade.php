@@ -1,9 +1,18 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content')    
 
-    <nav-component></nav-component>
-    <search-component></search-component>
+    <nav-component 
+        :route="{{ json_encode(route('auth.check')) }}"
+        :login-route="{{ json_encode(route('login')) }}"
+        :img-asset="{{ json_encode(asset('images')) }}"
+    ></nav-component>
+
+    <search-component
+        :blade-token="{{ json_encode(csrf_token()) }}"
+        :search-route="{{ json_encode(route('restaurant.search')) }}"
+    ></search-component>
+    
     <restaurant-component></restaurant-component>
 
 @endsection

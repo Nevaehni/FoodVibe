@@ -22,7 +22,7 @@ class Restaurants extends Migration
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id')->nullable();            
             $table->timestamps();
         });
     }
