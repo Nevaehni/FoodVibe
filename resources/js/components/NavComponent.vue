@@ -7,18 +7,19 @@
             </div>    
             <h3 class="welcomeText">Welcome {{userData.name}}</h3>
 
-            <div class="buttons">        
-                <a href="#"><span>Basket</span></a>
-                <a href="#"><span>Order History</span></a>
+            <div class="buttons" >        
+                <a v-if="user" href="#"><span>Basket</span></a>
+                <a v-if="user" href="#"><span>Order History</span></a>                
+                <a v-if="user" onclick="event.preventDefault();" @click="toggleProfile()" href="profile"><span>Edit Profile</span></a>
                 <a v-if="user" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span>Logout</span></a>
-                <a v-else href="#" onclick="event.preventDefault();" @click="toggle()"><span>Login</span></a>
+                <a v-else href="#" onclick="event.preventDefault();" @click="toggleLogin()"><span>Login</span></a>
             </div>      
         </nav>
         
         <!--login form -->   
         <form v-if="loginShow" method="POST" :action="loginRoute" id="login_form">      
             <input type="hidden" name="_token" :value="csrfToken">     
-            <a id="close_btn" onclick="event.preventDefault();" @click="toggle()" href="#">X</a>       
+            <a id="close_btn" onclick="event.preventDefault();" @click="toggleLogin()" href="#">X</a>       
             <div class="email_div">
                 <label for="email" class="">E-Mail Address</label>
                 <div class="col-md-6">
@@ -37,13 +38,46 @@
                 <button type="submit" class="btn btn-primary">
                     Login
                 </button>                
-                <button type="submit" class="btn btn-primary">
+                <a href="register" type="submit" class="btn btn-primary">
                     Register
-                </button>                
+                </a>                
             </div>
         </form>
 
-</div>
+        <!--Profile form -->   
+        <form v-if="profileShow" method="POST" :action="profileUpdateRoute" id="profile_form">      
+            <input type="hidden" name="_token" :value="csrfToken">     
+            <a id="close_btn" onclick="event.preventDefault();" @click="toggleProfile()" href="#">X</a> 
+
+            <label for="name">Full name</label>
+            <input type="text" name="name" :value="userData.name" :placeholder="userData.name">
+
+            <label for="address">Adress</label>
+            <input type="text" name="address" :value="userData.address" :placeholder="userData.address">
+
+            <label for="zipcode">Zipcode</label>
+            <input type="text" name="zipcode" :value="userData.zipcode" :placeholder="userData.zipcode">
+
+            <label for="city">City</label>
+            <input type="text" name="city" :value="userData.city" :placeholder="userData.city">
+
+            <label for="phone">Phone number</label>
+            <input type="text" name="phone" :value="userData.phone" :placeholder="userData.phone">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" :value="userData.email" :placeholder="userData.email">
+
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="password">
+
+            <div class="button_div">              
+                <button type="submit" class="btn btn-primary">
+                    Update
+                </button>                 
+            </div>
+        </form>
+
+    </div>
 </template>
 
 <script>
@@ -51,24 +85,29 @@ export default {
     data()
     {
         return{
-            //User
-            user: false,
+            //Userdata
             userData: {name: 'guest'},
+
+            //UserCheck
+            user: false,           
 
             //Login
             loginShow: false,
             csrfToken: null,
+
+            //Setting edit
+            profileShow: false,                  
         }
     },
     props: 
     {
         route: { type: String, required: true },
         imgAsset: String,
-        loginRoute: String
+        loginRoute: String,
+        profileUpdateRoute: String
     },
     created()
-    {
-        console.log(this.loginRoute)
+    {      
         //Check if user is logged in
         axios.get(this.route)
         .then(response => 
@@ -91,45 +130,22 @@ export default {
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
     },
     methods:{
-        toggle: function(){
+        toggleLogin: function()
+        {
             this.loginShow = !this.loginShow
-        }
+        },
+
+        toggleProfile: function()
+        {
+            if(this.userData.name != 'guest' && this.userData.id != 'undefined')
+            {   
+                this.profileShow = !this.profileShow
+            }
+            else
+            {
+                this.profileShow = false
+            }                    
+        },
     }
 }
 </script>
-
-<style scoped>
-
-#login_form
-{
-    background-color: #000000;
-    color: white;
-    border: 10px solid #FFB101;
-    border-radius: 35px;
-    text-align: center;
-    position: fixed;   
-    left: 45%;
-    top: 20%;
-    max-width: 300px;
-    max-height: 300px;
-    z-index: 5;
-    opacity: 1!important;
-}
-
-#close_btn
-{
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    width: 25px;
-    padding: 1px;
-    height: 25px;
-    border: 1px solid white;
-    border-radius: 50%;
-}
-
-.password_div, .button_div, .email_div
-{
-    margin: 20px;
-}
-</style>

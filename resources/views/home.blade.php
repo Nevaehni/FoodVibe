@@ -5,6 +5,7 @@
     <nav-component 
         :route="{{ json_encode(route('auth.check')) }}"
         :login-route="{{ json_encode(route('login')) }}"
+        :profile-update-route="{{ json_encode(route('profile.update')) }}"
         :img-asset="{{ json_encode(asset('images')) }}"
     ></nav-component>
 

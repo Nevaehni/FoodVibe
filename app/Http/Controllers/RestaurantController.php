@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Restaurant;
 use App\Restaurant_schedule;
-use DateTime;
+use App\Restaurant;
 use Carbon\Carbon;
+use DateTime;
+
 
 class RestaurantController extends Controller
 {
@@ -23,7 +24,7 @@ class RestaurantController extends Controller
         //Array with the data
         $status = []; 
 
-        // loop through time ranges for current day
+        //Loop through time ranges for current day
         foreach ($storeSchedule as $s) {
                      
             // create time objects from start/end times

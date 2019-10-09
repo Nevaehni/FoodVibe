@@ -1,6 +1,6 @@
 <template>
     <div class="mainContainer">
-        <input v-on:input="search($event)" id="searchBar" type="text">
+        <input v-on:input="search($event)" id="searchBar" type="text" placeholder="The Noodlebar...">
         <div id="searchResults"></div>
         <input type="text" placeholder="Zipcode..">
         <div>
@@ -25,8 +25,7 @@ export default {
     },
     created()
     {
-        console.log(this.searchRoute)
-        console.log(this.bladeToken)
+        
     },
 
     methods:
@@ -46,8 +45,7 @@ export default {
             })
             .then(response => 
             {    
-                $('#searchResults').html(response.data);  
-                console.log(response.data)                                 
+                $('#searchResults').html(response.data);                                          
             })
             .catch(err =>{
                 console.log("--MY ERROR: "+err)
