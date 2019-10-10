@@ -38550,7 +38550,7 @@ var render = function() {
           _c("span", { staticClass: "category" }, [_vm._v("Main courses")]),
           _vm._v(" "),
           _vm._l(_vm.consumables.restaurant_consumables, function(con, id) {
-            return con.category == "main course"
+            return con.category === "main course"
               ? _c("div", { key: id, staticClass: "foodContent" }, [
                   _c("img", {
                     attrs: {

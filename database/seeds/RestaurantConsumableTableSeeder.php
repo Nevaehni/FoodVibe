@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Restaurant_consumable;
+use App\Restaurant;
 use App\Consumable;
+
 
 class RestaurantConsumableTableSeeder extends Seeder
 {
@@ -11,66 +13,105 @@ class RestaurantConsumableTableSeeder extends Seeder
      *
      * @return void
      */
+   
+
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Restaurant_consumable::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '1',
-            'price' => '2.15',
-            'category' => Consumable::find(1)->category
-        ]);
+        foreach(range(1,3) as $r)
+        {
+            //Main course
+            foreach(range(1,5) as $rr)
+            {               
+                //Get all restaurant consumables
+                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rr)->where('category', 'main course')->get();
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '2',
-            'price' => '1.95',
-            'category' =>  Consumable::find(2)->category
-        ]);
+                //Put ids in array
+                $data = [];
+                foreach($getCurrentRestaurantConsumables as $g)
+                {
+                    array_push($data, $g->consumable_id);
+                }
+                
+                //If empty put 0 in array
+                if(count($data) == 0)
+                {                    
+                    $data = [0];
+                }
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '3',
-            'price' => '2.10',
-            'category' => Consumable::find(3)->category
-        ]);
+                //Find random id
+                $randomConsumable = Consumable::where('category', 'main course')->whereNotIn('id', $data)->get()->random()->id;
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '4',
-            'price' => '2.12',
-            'category' => Consumable::find(4)->category
-        ]);
+                DB::table('restaurant_consumables')->insert([
+                    'restaurant_id' => $rr,
+                    'consumable_id' => $randomConsumable,
+                    'price' => random_int(1,5),
+                    'category' => Consumable::find($randomConsumable)->category
+                ]);
+            }
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '5',
-            'price' => '2.15',
-            'category' => Consumable::find(5)->category
-        ]);
+            //Side dish
+            foreach(range(1,5) as $rrr)
+            {               
+                //Get all restaurant consumables
+                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rrr)->where('category', 'side dish')->get();
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '6',
-            'price' => '2.16',
-            'category' => Consumable::find(6)->category
-        ]);
+                //Put ids in array
+                $data = [];
+                foreach($getCurrentRestaurantConsumables as $g)
+                {
+                    array_push($data, $g->consumable_id);
+                }
+                
+                //If empty put 0 in array
+                if(count($data) == 0)
+                {                    
+                    $data = [0];
+                }
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '7',
-            'price' => '2.17',
-            'category' => Consumable::find(7)->category
-        ]);
+                //Find random id
+                $randomConsumable = Consumable::where('category', 'side dish')->whereNotIn('id', $data)->get()->random()->id;
 
-        DB::table('restaurant_consumables')->insert([
-            'restaurant_id' => '1',
-            'consumable_id' => '8',
-            'price' => '2.18',
-            'category' => Consumable::find(8)->category
-        ]);
+                DB::table('restaurant_consumables')->insert([
+                    'restaurant_id' => $rrr,
+                    'consumable_id' => $randomConsumable,
+                    'price' => random_int(1,5),
+                    'category' => Consumable::find($randomConsumable)->category
+                ]);
+            }
+
+            //Drinks
+            foreach(range(1,5) as $rrrr)
+            {               
+                //Get all restaurant consumables
+                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rrrr)->where('category', 'drink')->get();
+
+                //Put ids in array
+                $data = [];
+                foreach($getCurrentRestaurantConsumables as $g)
+                {
+                    array_push($data, $g->consumable_id);
+                }
+                
+                //If empty put 0 in array
+                if(count($data) == 0)
+                {                    
+                    $data = [0];
+                }
+
+                //Find random id
+                $randomConsumable = Consumable::where('category', 'drink')->whereNotIn('id', $data)->get()->random()->id;
+
+                DB::table('restaurant_consumables')->insert([
+                    'restaurant_id' => $rrrr,
+                    'consumable_id' => $randomConsumable,
+                    'price' => random_int(1,5),
+                    'category' => Consumable::find($randomConsumable)->category
+                ]);
+            }
+        }
     }
 }

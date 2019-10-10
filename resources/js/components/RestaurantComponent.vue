@@ -11,7 +11,7 @@
             </div>
             <div class="foodContainer">     
                 <span class="category">Main courses</span>         
-                <div class="foodContent" v-if="con.category == 'main course'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
+                <div class="foodContent" v-if="con.category === 'main course'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
                     <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
                     <div class="title">
                         <span>{{con.consumable.title}}</span>
