@@ -15,8 +15,8 @@ class RestaurantSchedules extends Migration
     {
         Schema::create('restaurant_schedules', function (Blueprint $table) {
             $table->integer('restaurant_id');
-            $table->datetime('open_time')->nullable();
-            $table->datetime('close_time')->nullable();
+            $table->datetime('closed_from')->nullable();
+            $table->datetime('closed_till')->nullable();
         });
     }
 

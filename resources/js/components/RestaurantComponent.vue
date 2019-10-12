@@ -1,86 +1,102 @@
 <template>
     <div>
-        <div class="mainContainer"> 
+        <edit-component v-if="edit" :conObj="consumables" :routeCons="allCons"></edit-component>
+        <div v-if="edit == false" class="mainContainer"> 
             <div class="contentContainer">
                 <img :src="'../images/restaurants/'+this.consumables.image" alt="Restaurant logo">
                 <div class="title">
                     <span>{{this.consumables.title}}</span>
+                    <span @click="edit = true">Edit Menu</span>
                     <div class="divider"></div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
                 </div>    
             </div>
+
             <div class="foodContainer">     
                 <span class="category">Main courses</span>         
-                <div class="foodContent" v-if="con.category === 'main course'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
-                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
-                    <div class="title">
-                        <span>{{con.consumable.title}}</span>
-                        <div class="divider"></div>
-                        <p>{{"Category: "+con.category}}</p>
-                        <p>{{"Price: €"+con.price}}</p>
-                        <a href="">+</a>
+                <div class="foodContent" v-for="(con,id) in consumables.restaurant_consumables" :key="id">       
+                    <div v-if="con.category === 'main course'">
+                        <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                        <div class="title">
+                            <span>{{con.consumable.title}}</span>
+                            <div class="divider"></div>
+                            <p>{{"Category: "+con.category}}</p>
+                            <p>{{"Price: €"+con.price}}</p>
+                            <a href="">+</a>
+                        </div>                         
                     </div>   
                 </div> 
             </div>
 
             <div class="foodContainer">
                 <span class="category">Side dishes</span>         
-                <div v-if="con.category == 'side dish'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
-                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
-                    <div class="title">
-                        <span>{{con.consumable.title}}</span>
-                        <div class="divider"></div>
-                        <p>{{"Category: "+con.category}}</p>
-                        <p>{{"Price: €"+con.price}}</p>
-                        <a href="">+</a>
-                    </div>   
+                <div v-for="(con,id) in consumables.restaurant_consumables" :key="id">     
+                    <div v-if="con.category === 'side dish'">               
+                        <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                        <div class="title">
+                            <span>{{con.consumable.title}}</span>
+                            <div class="divider"></div>
+                            <p>{{"Category: "+con.category}}</p>
+                            <p>{{"Price: €"+con.price}}</p>
+                            <a href="">+</a>
+                        </div> 
+                    </div>  
                 </div> 
             </div>
             
             <div class="foodContainer">
                 <span class="category">Drinks</span>         
-                <div v-if="con.category == 'drink'" v-for="(con,id) in consumables.restaurant_consumables" :key="id">                    
-                    <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
-                    <div class="title">
-                        <span>{{con.consumable.title}}</span>
-                        <div class="divider"></div>
-                        <p>{{"Category: "+con.category}}</p>
-                        <p>{{"Price: €"+con.price}}</p>
-                        <a href="">+</a>
-                    </div>   
+                <div v-for="(con,id) in consumables.restaurant_consumables" :key="id">    
+                    <div v-if="con.category === 'drink'">                  
+                        <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
+                        <div class="title">
+                            <span>{{con.consumable.title}}</span>
+                            <div class="divider"></div>
+                            <p>{{"Category: "+con.category}}</p>
+                            <p>{{"Price: €"+con.price}}</p>
+                            <a href="">+</a>
+                        </div>   
+                    </div> 
                 </div>
             </div> 
+            
         </div>
     </div>  
 </template>
 
 <script>
-export default {  
+Vue.component('edit-component', require('./RestaurantEditComponent.vue').default);
+
+export default {      
     data() 
     {
         return{
-            consumables: [],
-            id: this.restaurant    
+            //Edit
+            edit: true,
+
+            //Consumables
+            consumables: {}
         }
     },  
 
     props:
     {
-        restaurant: Number
+        restaurant: Number,
+        allCons: String  
     },
 
     created()
     {      
-        axios.get('consumables/' + this.id )
+        axios.get('consumables/' + this.restaurant )
         .then(response => 
         {
-            this.consumables = response.data;          		
+            this.consumables = response.data; 
+            // console.log(this.consumables)         		
         })
         .catch(err => 
         {
             console.log('My error'+err);
-        })    
-    
+        })            
     },
     methods: {
         
@@ -175,6 +191,23 @@ export default {
     min-width: 110px;
     color: white;
     font-family: "Sitka Banner", italic;
+}
+
+.title span:nth-of-type(2) 
+{
+    float: right;
+    width: 150px;
+    border-radius: 35px;
+    background-color: black;
+    color: white;
+    position: relative;
+    align-self: center;
+    vertical-align: middle;
+    text-align: center;
+    font-family: 'Sitka Banner', italic;
+    font-size: 20px;
+    border: 1px solid #707070;
+    cursor: pointer;
 }
 
 </style>

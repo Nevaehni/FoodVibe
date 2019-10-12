@@ -13,6 +13,9 @@
         :search-route="{{ json_encode(route('restaurant.search')) }}"
     ></search-component>
     
-    <restaurantpage-component :restaurant={{$restaurantData}}></restaurantpage-component>
+    <restaurantpage-component 
+        :restaurant={{$restaurantData}}
+        :all-cons="{{ json_encode(route('consumables.all')) }}"   
+    ></restaurantpage-component>
 
 @endsection
