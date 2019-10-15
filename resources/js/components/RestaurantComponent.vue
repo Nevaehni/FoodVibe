@@ -2,11 +2,12 @@
     <div>
         <edit-component v-if="edit" :conObj="consumables" :routeCons="allCons"></edit-component>
         <div v-if="edit == false" class="mainContainer"> 
+            
             <div class="contentContainer">
                 <img :src="'../images/restaurants/'+this.consumables.image" alt="Restaurant logo">
                 <div class="title">
                     <span>{{this.consumables.title}}</span>
-                    <span @click="edit = true">Edit Menu</span>
+                    <span v-if="consumables.id == userRestId.id" @click="edit = true">Edit Menu</span>
                     <div class="divider"></div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus ex corrupti aliquid deserunt molestiae architecto. Sit perferendis accusamus blanditiis totam nobis, amet excepturi dicta, nemo vero recusandae, voluptates delectus aspernatur?</p>
                 </div>    
@@ -72,10 +73,13 @@ export default {
     {
         return{
             //Edit
-            edit: true,
+            edit: false,
 
             //Consumables
-            consumables: {}
+            consumables: {},
+
+            //Check id restaurant
+            userRestId: {}
         }
     },  
 
@@ -91,7 +95,17 @@ export default {
         .then(response => 
         {
             this.consumables = response.data; 
-            // console.log(this.consumables)         		
+            // console.log(this.consumables.user_id)         		
+        })
+        .catch(err => 
+        {
+            console.log('My error'+err);
+        })    
+
+        axios.get('owner/check')
+        .then(response => 
+        {
+            this.userRestId = response.data;        		
         })
         .catch(err => 
         {

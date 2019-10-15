@@ -5,7 +5,7 @@
                 <span class="logo_name" >FoodVibe</span>   
                 <img class="logo_img" :src="imgAsset+'/logo/logo.png'" alt="">
             </div>    
-            <h3 class="welcomeText">Welcome {{userData.name}}</h3>
+            <h3 class="welcomeText">Logged in as {{userData.name}} #<span id="idUser">{{userData.id}}</span></h3>
 
             <div class="buttons" >        
                 <a v-if="user" href="#"><span>Basket</span></a>

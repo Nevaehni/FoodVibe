@@ -2055,14 +2055,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 Vue.component('edit-component', __webpack_require__(/*! ./RestaurantEditComponent.vue */ "./resources/js/components/RestaurantEditComponent.vue")["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //Edit
-      edit: true,
+      edit: false,
       //Consumables
-      consumables: {}
+      consumables: {},
+      //Check id restaurant
+      userRestId: {}
     };
   },
   props: {
@@ -2073,7 +2076,12 @@ Vue.component('edit-component', __webpack_require__(/*! ./RestaurantEditComponen
     var _this = this;
 
     axios.get('consumables/' + this.restaurant).then(function (response) {
-      _this.consumables = response.data; // console.log(this.consumables)         		
+      _this.consumables = response.data; // console.log(this.consumables.user_id)         		
+    })["catch"](function (err) {
+      console.log('My error' + err);
+    });
+    axios.get('owner/check').then(function (response) {
+      _this.userRestId = response.data;
     })["catch"](function (err) {
       console.log('My error' + err);
     });
@@ -2121,11 +2129,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      allCons: {}
+      allCons: {},
+      storeRoute: this.routeCons.replace('all', 'store'),
+      deleteRoute: this.routeCons.replace('all', 'delete'),
+      csrfToken: null
     };
+  },
+  computed: {
+    //Order by category
+    orderedConsumables: function orderedConsumables() {
+      return _.orderBy(this.conObj.restaurant_consumables, 'category', 'desc');
+    },
+    orderedAllConsumables: function orderedAllConsumables() {
+      return _.orderBy(this.allCons, 'category', 'desc');
+    }
   },
   props: {
     conObj: {},
@@ -2137,10 +2159,23 @@ __webpack_require__.r(__webpack_exports__);
     axios.get(this.routeCons).then(function (response) {
       _this.allCons = response.data;
     })["catch"](function (err) {
-      console.log('My error' + err);
-    });
+      console.log('My error ' + err);
+    }); //Get csrfToken
+
+    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   },
-  methods: {}
+  methods: {
+    storeRestaurant: function storeRestaurant() {
+      var _this2 = this;
+
+      axios.get('store').then(function (response) {
+        _this2.allCons = response.data;
+      })["catch"](function (err) {
+        console.log('My error ' + err);
+      });
+    },
+    deleteRestaurant: function deleteRestaurant() {}
+  }
 });
 
 /***/ }),
@@ -38342,7 +38377,10 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("h3", { staticClass: "welcomeText" }, [
-        _vm._v("Welcome " + _vm._s(_vm.userData.name))
+        _vm._v("Logged in as " + _vm._s(_vm.userData.name) + " #"),
+        _c("span", { attrs: { id: "idUser" } }, [
+          _vm._v(_vm._s(_vm.userData.id))
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
@@ -38669,17 +38707,19 @@ var render = function() {
               _c("div", { staticClass: "title" }, [
                 _c("span", [_vm._v(_vm._s(this.consumables.title))]),
                 _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.edit = true
-                      }
-                    }
-                  },
-                  [_vm._v("Edit Menu")]
-                ),
+                _vm.consumables.id == _vm.userRestId.id
+                  ? _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.edit = true
+                          }
+                        }
+                      },
+                      [_vm._v("Edit Menu")]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "divider" }),
                 _vm._v(" "),
@@ -38851,73 +38891,75 @@ var render = function() {
   return _c("div", { staticClass: "mainContainer" }, [
     _c("div", { staticClass: "addConsumable" }, [
       _vm._v("\n\n        Remove\n        "),
-      _c(
-        "form",
-        {
-          attrs: { action: "#" },
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.onSubmit($event)
-            }
-          }
-        },
-        [
-          _c(
-            "select",
-            { attrs: { name: "addSelect" } },
-            _vm._l(_vm.conObj.restaurant_consumables, function(con, id) {
-              return _c(
-                "option",
-                { key: id, domProps: { value: con.consumable.id } },
-                [_vm._v(_vm._s(con.consumable.title))]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Remove product")]
-          )
-        ]
-      ),
+      _c("form", { attrs: { action: _vm.deleteRoute, method: "post" } }, [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrfToken }
+        }),
+        _vm._v(" "),
+        _c(
+          "select",
+          { attrs: { name: "deleteID" } },
+          _vm._l(_vm.orderedConsumables, function(con, id) {
+            return _c(
+              "option",
+              { key: id, domProps: { value: con.consumable.id } },
+              [
+                _vm._v(
+                  _vm._s(con.consumable.title) +
+                    "  -  " +
+                    _vm._s(con.consumable.category)
+                )
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Remove product")]
+        )
+      ]),
       _vm._v(" "),
       _c("br"),
       _vm._v("\n        \n        Add\n        "),
-      _c(
-        "form",
-        {
-          attrs: { action: "" },
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.onSubmit($event)
-            }
+      _c("form", { attrs: { action: _vm.storeRoute, method: "post" } }, [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrfToken }
+        }),
+        _vm._v(" "),
+        _c(
+          "select",
+          { attrs: { name: "storeID" } },
+          _vm._l(_vm.orderedAllConsumables, function(cons, id) {
+            return _c("option", { key: id, domProps: { value: cons.id } }, [
+              _vm._v(_vm._s(cons.title) + " - " + _vm._s(cons.category))
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            name: "price",
+            type: "number",
+            placeholder: "Price",
+            required: "",
+            min: "0",
+            value: "0",
+            step: ".01"
           }
-        },
-        [
-          _c(
-            "select",
-            { attrs: { name: "addSelect" } },
-            _vm._l(_vm.allCons, function(cons, id) {
-              return _c("option", { key: id, domProps: { value: cons.id } }, [
-                _vm._v(_vm._s(cons.title))
-              ])
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c("input", { attrs: { type: "number", placeholder: "Price" } }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Add product")]
-          )
-        ]
-      )
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Add product")]
+        )
+      ])
     ])
   ])
 }

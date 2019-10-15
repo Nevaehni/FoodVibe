@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant_schedule;
+use App\Restaurant_consumable;
 use App\Restaurant;
 use App\Consumable;
+use App\User;
 use Carbon\Carbon;
 use DateTime;
+use Auth;
+
 
 
 class RestaurantController extends Controller
@@ -61,5 +65,33 @@ class RestaurantController extends Controller
     public function allConsumables()
     {        
         return Consumable::all();
+    } 
+
+    public function store(request $request)
+    {        
+        $restID = restaurant::where('user_id', Auth::id())->first()->id;
+
+        $newCons = new Restaurant_consumable;
+        $newCons->restaurant_id = $restID;
+        $newCons->consumable_id = $request->storeID;
+        $newCons->price = number_format((float)$request->price, 2, '.', '');
+        $newCons->category = Consumable::find($request->storeID)->category;
+        $newCons->save();
+
+        return redirect()->back();   
     }  
+
+    public function delete(request $request)
+    {        
+        $restID = restaurant::where('user_id', Auth::id())->first()->id;
+        Restaurant_consumable::where('consumable_id', $request->deleteID)->where('restaurant_id', $restID)->delete();
+
+        return redirect()->back()->with('Success', 'Deleted successfully');
+    } 
+    
+    public function check()
+    {       
+        return Restaurant::where('user_id', Auth::id())->first();
+    }
+
 }

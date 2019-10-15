@@ -4,9 +4,10 @@
         <div class="addConsumable">
 
             Remove
-            <form action="#" @submit.prevent="onSubmit">
-                <select name="addSelect">
-                    <option :value="con.consumable.id" v-for="(con,id) in conObj.restaurant_consumables" :key="id">{{con.consumable.title}}</option>
+            <form :action="deleteRoute" method="post">
+                <input type="hidden" name="_token" :value="csrfToken">
+                <select name="deleteID">
+                    <option :value="con.consumable.id" v-for="(con,id) in orderedConsumables" :key="id">{{con.consumable.title}}  -  {{con.consumable.category}}</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Remove product</button>
             </form>
@@ -14,11 +15,12 @@
             <br>
             
             Add
-            <form action="" @submit.prevent="onSubmit">
-                <select name="addSelect">
-                    <option :value="cons.id" v-for="(cons,id) in allCons" :key="id">{{cons.title}}</option>
+            <form :action="storeRoute" method="post">
+                <input type="hidden" name="_token" :value="csrfToken"> 
+                <select name="storeID">
+                    <option :value="cons.id" v-for="(cons,id) in orderedAllConsumables" :key="id">{{cons.title}} - {{cons.category}}</option>
                 </select>
-                <input type="number" placeholder="Price">
+                <input name="price" type="number" placeholder="Price" required min="0" value="0" step=".01">
                 <button type="submit" class="btn btn-primary">Add product</button>
             </form>
 
@@ -32,7 +34,22 @@ export default {
     data(){
         return{
             allCons: {},
+            storeRoute: this.routeCons.replace('all', 'store'),
+            deleteRoute: this.routeCons.replace('all', 'delete'),
+            csrfToken: null
         }
+    },
+        
+    computed:
+    {
+        //Order by category
+        orderedConsumables: function () {
+            return _.orderBy(this.conObj.restaurant_consumables, 'category', 'desc')
+        },
+
+        orderedAllConsumables: function () {
+            return _.orderBy(this.allCons, 'category', 'desc')
+        },
     },
 
     props:
@@ -41,7 +58,8 @@ export default {
         routeCons: String
     },
     
-    created(){
+    created()
+    {
         axios.get(this.routeCons)
         .then(response => 
         {
@@ -49,11 +67,33 @@ export default {
         })
         .catch(err => 
         {
-            console.log('My error'+err);
+            console.log('My error '+err);
         }) 
+
+        //Get csrfToken
+        this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
     },
 
-    methods:{
+    methods:
+    {
+        storeRestaurant: function()
+        {
+            axios.get('store')
+            .then(response => 
+            {
+                this.allCons = response.data;     		
+            })
+            .catch(err => 
+            {
+                console.log('My error '+err);
+            }) 
+
+        },
+
+        deleteRestaurant: function()
+        {
+
+        },
 
     }
 }

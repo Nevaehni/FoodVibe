@@ -12,7 +12,12 @@ Route::resource('/home', 'HomeController');
 Route::get('/restaurants', 'RestaurantController@restaurants')->name('restaurants.data');
 Route::get('/restaurant/{id}', 'RestaurantController@restaurantPage')->name('restaurant.page');
 Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->name('consumables.page');
+
+//Restaurant Owner
 Route::get('/restaurant/consumable/all', 'RestaurantController@allConsumables')->name('consumables.all');
+Route::post('/restaurant/consumable/delete', 'RestaurantController@delete')->name('restaurant.delete');
+Route::post('/restaurant/consumable/store', 'RestaurantController@store')->name('restaurant.store');
+Route::get('/restaurant/owner/check', 'RestaurantController@check')->name('restaurant.check');
 
 //Navigation Authcheck
 Route::get('/authCheck', 'HomeController@authCheck')->name('auth.check');
