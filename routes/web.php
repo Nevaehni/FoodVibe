@@ -17,6 +17,7 @@ Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->
 Route::get('/restaurant/consumable/all', 'RestaurantController@allConsumables')->name('consumables.all');
 Route::post('/restaurant/consumable/delete', 'RestaurantController@delete')->name('restaurant.delete');
 Route::post('/restaurant/consumable/store', 'RestaurantController@store')->name('restaurant.store');
+Route::post('/restaurant/consumable/new', 'RestaurantController@newConsumable')->name('restaurant.new');
 Route::get('/restaurant/owner/check', 'RestaurantController@check')->name('restaurant.check');
 
 //Navigation Authcheck

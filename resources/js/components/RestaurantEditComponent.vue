@@ -3,7 +3,7 @@
     <div class="mainContainer"> 
         <div class="addConsumable">
 
-            Remove
+            Remove consumable from menu
             <form :action="deleteRoute" method="post">
                 <input type="hidden" name="_token" :value="csrfToken">
                 <select name="deleteID">
@@ -14,13 +14,31 @@
 
             <br>
             
-            Add
+            Add consumable to menu
             <form :action="storeRoute" method="post">
                 <input type="hidden" name="_token" :value="csrfToken"> 
                 <select name="storeID">
                     <option :value="cons.id" v-for="(cons,id) in orderedAllConsumables" :key="id">{{cons.title}} - {{cons.category}}</option>
                 </select>
                 <input name="price" type="number" placeholder="Price" required min="0" value="0" step=".01">
+                <button type="submit" class="btn btn-primary">Add to menu</button>
+            </form>
+
+            <br>
+
+            Add new consumable
+            <form :action="newConRoute" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" :value="csrfToken">                
+                <input name="consumableName" type="text" placeholder="Product name">
+                <input type="file" name="consumableImage">
+                <select name="category">
+                    <option disabled selected>Category</option>>
+                    <option value="main dish">Main dish</option>
+                    <option value="side dish">Side dish</option>
+                    <option value="drink">Drinks</option>
+                </select>
+                <input type="hidden" name="rest" :value="restid">
+                <!-- <input name="price" type="number" placeholder="Price" required step=".01"> -->
                 <button type="submit" class="btn btn-primary">Add product</button>
             </form>
 
@@ -36,6 +54,7 @@ export default {
             allCons: {},
             storeRoute: this.routeCons.replace('all', 'store'),
             deleteRoute: this.routeCons.replace('all', 'delete'),
+            newConRoute: this.routeCons.replace('all', 'new'),
             csrfToken: null
         }
     },
@@ -55,7 +74,8 @@ export default {
     props:
     {
         conObj: {},
-        routeCons: String
+        routeCons: String,
+        restid: Number
     },
     
     created()
@@ -63,7 +83,7 @@ export default {
         axios.get(this.routeCons)
         .then(response => 
         {
-            this.allCons = response.data;     		
+            this.allCons = response.data;  
         })
         .catch(err => 
         {

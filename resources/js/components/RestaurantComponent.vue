@@ -1,6 +1,6 @@
 <template>
     <div>
-        <edit-component v-if="edit" :conObj="consumables" :routeCons="allCons"></edit-component>
+        <edit-component v-if="edit" :conObj="consumables" :routeCons="allCons" :restid="restaurant"></edit-component>
         <div v-if="edit == false" class="mainContainer"> 
             
             <div class="contentContainer">
@@ -94,14 +94,14 @@ export default {
         axios.get('consumables/' + this.restaurant )
         .then(response => 
         {
-            this.consumables = response.data; 
-            // console.log(this.consumables.user_id)         		
+            this.consumables = response.data;      		
         })
         .catch(err => 
         {
             console.log('My error'+err);
         })    
 
+        //Check the current restaurant owner
         axios.get('owner/check')
         .then(response => 
         {
@@ -112,7 +112,9 @@ export default {
             console.log('My error'+err);
         })            
     },
-    methods: {
+
+    methods: 
+    {
         
     }
 }
