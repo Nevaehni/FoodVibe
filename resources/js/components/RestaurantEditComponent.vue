@@ -20,7 +20,7 @@
                 <select name="storeID">
                     <option :value="cons.id" v-for="(cons,id) in orderedAllConsumables" :key="id">{{cons.title}} - {{cons.category}}</option>
                 </select>
-                <input name="price" type="number" placeholder="Price" required min="0" value="0" step=".01">
+                <input name="price" type="number" placeholder="Price" required step=".01">
                 <button type="submit" class="btn btn-primary">Add to menu</button>
             </form>
 
@@ -33,12 +33,12 @@
                 <input type="file" name="consumableImage">
                 <select name="category">
                     <option disabled selected>Category</option>>
-                    <option value="main dish">Main dish</option>
+                    <option value="main course">Main course</option>
                     <option value="side dish">Side dish</option>
                     <option value="drink">Drinks</option>
                 </select>
                 <input type="hidden" name="rest" :value="restid">
-                <!-- <input name="price" type="number" placeholder="Price" required step=".01"> -->
+                <input name="price" type="number" placeholder="Price" required step=".01">
                 <button type="submit" class="btn btn-primary">Add product</button>
             </form>
 

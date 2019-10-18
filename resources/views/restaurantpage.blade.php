@@ -3,19 +3,19 @@
 @section('content')
 
     <nav-component 
-        :route="{{ json_encode(route('auth.check')) }}"
-        :login-route="{{ json_encode(route('login')) }}"
-        :img-asset="{{ json_encode(asset('images')) }}"
+        route="{{ route('auth.check') }}"
+        login-route="{{ route('login') }}"
+        img-asset="{{ asset('images') }}"
     ></nav-component>
 
     <search-component
-        :blade-token="{{ json_encode(csrf_token()) }}"
-        :search-route="{{ json_encode(route('restaurant.search')) }}"
+        blade-token="{{ csrf_token() }}"
+        search-route="{{ route('restaurant.search') }}"
     ></search-component>
     
     <restaurantpage-component 
-        :restaurant={{$restaurantData}}
-        :all-cons="{{ json_encode(route('consumables.all')) }}"   
+        restaurant={{$restaurantData}}
+        all-cons="{{ route('consumables.all') }}"   
     ></restaurantpage-component>
 
 @endsection

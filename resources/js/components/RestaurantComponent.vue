@@ -193,8 +193,7 @@ export default {
 .foodContainer
 {
     height: auto;
-    width: 1100px;
-    right: -8.5%;   
+    width: 98%; 
 }
 
 .category

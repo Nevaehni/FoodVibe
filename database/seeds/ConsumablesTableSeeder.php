@@ -18,7 +18,6 @@ class ConsumablesTableSeeder extends Seeder
         [
             'kebab.webp',
             'salmon_mango.png',
-            'mountain_dew.png',
             'turkey_pasaman_cheese.png',
             'chicken_mix.webp',
             'grass_taco_bowl.png',

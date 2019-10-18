@@ -6757,7 +6757,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 5;\r\n    color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.title a[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    width: 1100px;\r\n    right: -8.5%;\n}\n.category[data-v-78e2f7b6]\r\n{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n}\n.title span[data-v-78e2f7b6]:nth-of-type(2) \r\n{\r\n    float: right;\r\n    width: 150px;\r\n    border-radius: 35px;\r\n    background-color: black;\r\n    color: white;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\r\n    cursor: pointer;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 5;\r\n    color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.title a[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    width: 98%;\n}\n.category[data-v-78e2f7b6]\r\n{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n}\n.title span[data-v-78e2f7b6]:nth-of-type(2) \r\n{\r\n    float: right;\r\n    width: 150px;\r\n    border-radius: 35px;\r\n    background-color: black;\r\n    color: white;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\r\n    cursor: pointer;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -38970,8 +38970,6 @@ var render = function() {
             type: "number",
             placeholder: "Price",
             required: "",
-            min: "0",
-            value: "0",
             step: ".01"
           }
         }),
@@ -39017,6 +39015,16 @@ var render = function() {
             domProps: { value: _vm.restid }
           }),
           _vm._v(" "),
+          _c("input", {
+            attrs: {
+              name: "price",
+              type: "number",
+              placeholder: "Price",
+              required: "",
+              step: ".01"
+            }
+          }),
+          _vm._v(" "),
           _c(
             "button",
             { staticClass: "btn btn-primary", attrs: { type: "submit" } },
@@ -39037,7 +39045,9 @@ var staticRenderFns = [
         _vm._v("Category")
       ]),
       _vm._v(">\n                "),
-      _c("option", { attrs: { value: "main dish" } }, [_vm._v("Main dish")]),
+      _c("option", { attrs: { value: "main course" } }, [
+        _vm._v("Main course")
+      ]),
       _vm._v(" "),
       _c("option", { attrs: { value: "side dish" } }, [_vm._v("Side dish")]),
       _vm._v(" "),

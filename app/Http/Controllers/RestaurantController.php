@@ -94,14 +94,13 @@ class RestaurantController extends Controller
         return Restaurant::where('user_id', Auth::id())->first();
     }
 
-    public function newConsumable(request $request)
+    public function newConsumable(Request $request)
     {     
         $defaultPath = public_path('/images/consumables/');        
         $consName = $request->consumableName;
-        // $consPrice = $request->price;           
 
         $image = $request->file('consumableImage');
-        $imageName = $consName.'.'.$image->getClientOriginalExtension(); 
+        $imageName = str_replace(" ", "_", $consName).'.'.$image->getClientOriginalExtension(); 
         
         $image->move($defaultPath, $imageName);
 
@@ -111,16 +110,13 @@ class RestaurantController extends Controller
         $consumable->image = $imageName;
         $consumable->save();
         
-        // $consumID = Consumable::where('title', $consName)->first()->id;
-
-        // $restaurant_con = new Restaurant_consumable;
-        
-        // $restaurant_con->restaurant_id = $request->rest;
-       
-        // $restaurant_con->consumable_id = $consumID;
-        // $restaurant_con->category = $request->category;
-      
-        // $restaurant_con->save();
+        $consumID = $consumable->id;
+        $restaurant_con = new Restaurant_consumable;
+        $restaurant_con->restaurant_id = $request->rest;
+        $restaurant_con->consumable_id = $consumID;
+        $restaurant_con->category = $request->category;
+        $restaurant_con->price = $request->price;
+        $restaurant_con->save();
 
         return redirect()->back();       
     }
