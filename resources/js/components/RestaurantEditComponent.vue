@@ -80,6 +80,7 @@ export default {
     
     created()
     {
+        //Get all consumables
         axios.get(this.routeCons)
         .then(response => 
         {

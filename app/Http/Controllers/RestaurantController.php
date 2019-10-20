@@ -11,8 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use DateTime;
 use Auth;
-
-
+use StdClass;
 
 class RestaurantController extends Controller
 {
@@ -47,9 +46,7 @@ class RestaurantController extends Controller
             }
             return ['restaurant' => Restaurant::all(), 'time' => $status];
         }
-
         return ['restaurant' => Restaurant::all(), 'time' => false];
-
     }  
 
     public function restaurantPage($id)
@@ -119,5 +116,27 @@ class RestaurantController extends Controller
         $restaurant_con->save();
 
         return redirect()->back();       
+    }
+
+    public function cartAdd(Request $request)
+    {        
+        
+        //if already exists increase quantity
+        if( session("cart.$request->consumable_id")  )
+        {
+            //Get current quantity and add 1
+            $total = session()->get("cart.$request->consumable_id.0.quantity") + 1;
+      
+            //Put the data in the session
+            session()->put("cart.$request->consumable_id.0.quantity", $total); 
+            session()->save();
+        }
+        else
+        {
+            session()->push("cart.$request->consumable_id", $request->all());
+            session()->save();
+        }
+
+        return json_encode(session()->get('cart'));
     }
 }

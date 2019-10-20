@@ -12,6 +12,8 @@ Route::resource('/home', 'HomeController');
 Route::get('/restaurants', 'RestaurantController@restaurants')->name('restaurants.data');
 Route::get('/restaurant/{id}', 'RestaurantController@restaurantPage')->name('restaurant.page');
 Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->name('consumables.page');
+Route::post('/cart/product', 'RestaurantController@cartAdd')->name('cart.add');
+
 
 //Restaurant Owner
 Route::get('/restaurant/consumable/all', 'RestaurantController@allConsumables')->name('consumables.all');
@@ -20,7 +22,7 @@ Route::post('/restaurant/consumable/store', 'RestaurantController@store')->name(
 Route::post('/restaurant/consumable/new', 'RestaurantController@newConsumable')->name('restaurant.new');
 Route::get('/restaurant/owner/check', 'RestaurantController@check')->name('restaurant.check');
 
-//Navigation Authcheck
+//Navigation
 Route::get('/authCheck', 'HomeController@authCheck')->name('auth.check');
 
 //Searchbar
