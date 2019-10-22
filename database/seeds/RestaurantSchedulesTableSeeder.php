@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Restaurant;
-use App\Restaurant_schedule;
+use App\RestaurantSchedule;
 use Carbon\Carbon;
 
 class RestaurantSchedulesTableSeeder extends Seeder
@@ -15,7 +15,7 @@ class RestaurantSchedulesTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Restaurant_schedule::truncate();
+        RestaurantSchedule::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         foreach(range(1,5) as $r)

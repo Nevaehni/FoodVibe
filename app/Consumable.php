@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consumable extends Model
 {
-    public function Restaurant_consumables()
+    public function RestaurantConsumables()
     {
-        return $this->belongsToMany('App\Restaurant_consumable');
+        return $this->belongsToMany('App\RestaurantConsumable');
     }
 
-    public function Consumable_orders()
+    public function ConsumableOrders()
     {
-        return $this->hasMany('App\Consumable_order');
+        return $this->hasMany('App\ConsumableOrder');
     }
 }

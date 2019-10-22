@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Restaurant_consumable;
+use App\RestaurantConsumable;
 use App\Restaurant;
 use App\Consumable;
 
@@ -18,7 +18,7 @@ class RestaurantConsumableTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Restaurant_consumable::truncate();
+        RestaurantConsumable::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         foreach(range(1,3) as $r)
@@ -27,7 +27,7 @@ class RestaurantConsumableTableSeeder extends Seeder
             foreach(range(1,5) as $rr)
             {               
                 //Get all restaurant consumables
-                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rr)->where('category', 'main course')->get();
+                $getCurrentRestaurantConsumables = RestaurantConsumable::where('restaurant_id', $rr)->where('category', 'main course')->get();
 
                 //Put ids in array
                 $data = [];
@@ -57,7 +57,7 @@ class RestaurantConsumableTableSeeder extends Seeder
             foreach(range(1,5) as $rrr)
             {               
                 //Get all restaurant consumables
-                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rrr)->where('category', 'side dish')->get();
+                $getCurrentRestaurantConsumables = RestaurantConsumable::where('restaurant_id', $rrr)->where('category', 'side dish')->get();
 
                 //Put ids in array
                 $data = [];
@@ -87,7 +87,7 @@ class RestaurantConsumableTableSeeder extends Seeder
             foreach(range(1,5) as $rrrr)
             {               
                 //Get all restaurant consumables
-                $getCurrentRestaurantConsumables = Restaurant_consumable::where('restaurant_id', $rrrr)->where('category', 'drink')->get();
+                $getCurrentRestaurantConsumables = RestaurantConsumable::where('restaurant_id', $rrrr)->where('category', 'drink')->get();
 
                 //Put ids in array
                 $data = [];

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Restaurant_schedule;
-use App\Restaurant_consumable;
+use App\RestaurantSchedule;
+use App\RestaurantConsumable;
+use App\ConsumableOrder;
 use App\Restaurant;
 use App\Consumable;
+use App\Order;
 use App\User;
 use Carbon\Carbon;
 use DateTime;
@@ -19,7 +21,7 @@ class RestaurantController extends Controller
     {       
         $currentTime = Carbon::now('Europe/Amsterdam');
 
-        $storeSchedule = Restaurant_schedule::where('closed_from', '<', $currentTime)->get();
+        $storeSchedule = RestaurantSchedule::where('closed_from', '<', $currentTime)->get();
       
         if($storeSchedule->isEmpty())
         {
@@ -56,7 +58,7 @@ class RestaurantController extends Controller
 
     public function consumables($id)
     {        
-        return Restaurant::with('restaurant_consumables.consumable')->where('id', $id)->first();
+        return Restaurant::with('restaurantconsumables.consumable')->where('id', $id)->first();
     }  
 
     public function allConsumables()
@@ -68,7 +70,7 @@ class RestaurantController extends Controller
     {        
         $restID = restaurant::where('user_id', Auth::id())->first()->id;
 
-        $newCons = new Restaurant_consumable;
+        $newCons = new RestaurantConsumable;
         $newCons->restaurant_id = $restID;
         $newCons->consumable_id = $request->storeID;
         $newCons->price = number_format((float)$request->price, 2, '.', '');
@@ -81,7 +83,7 @@ class RestaurantController extends Controller
     public function delete(request $request)
     {        
         $restID = restaurant::where('user_id', Auth::id())->first()->id;
-        Restaurant_consumable::where('consumable_id', $request->deleteID)->where('restaurant_id', $restID)->delete();
+        RestaurantConsumable::where('consumable_id', $request->deleteID)->where('restaurant_id', $restID)->delete();
 
         return redirect()->back()->with('Success', 'Deleted successfully');
     } 
@@ -108,7 +110,7 @@ class RestaurantController extends Controller
         $consumable->save();
         
         $consumID = $consumable->id;
-        $restaurant_con = new Restaurant_consumable;
+        $restaurant_con = new RestaurantConsumable;
         $restaurant_con->restaurant_id = $request->rest;
         $restaurant_con->consumable_id = $consumID;
         $restaurant_con->category = $request->category;
@@ -120,23 +122,66 @@ class RestaurantController extends Controller
 
     public function cartAdd(Request $request)
     {        
-        
-        //if already exists increase quantity
-        if( session("cart.$request->consumable_id")  )
+        if(Auth::check())
         {
-            //Get current quantity and add 1
-            $total = session()->get("cart.$request->consumable_id.0.quantity") + 1;
-      
-            //Put the data in the session
-            session()->put("cart.$request->consumable_id.0.quantity", $total); 
-            session()->save();
+            //Unset the token
+            unset($request['_token']);        
+                
+            //if already exists increase quantity
+            if( session("cart.$request->consumable_id")  )
+            {        
+                //Get current quantity and add 1
+                $total = session()->get("cart.$request->consumable_id.0.quantity") + 1;
+        
+                //Put the data in the session
+                session()->put("cart.$request->consumable_id.0.quantity", $total); 
+                session()->save();
+            }
+            else
+            {
+                //Add new product to session
+                session()->push("cart.$request->consumable_id", $request->all());
+                session()->save();
+            }
+
+            return json_encode(session()->get('cart'));
         }
         else
         {
-            session()->push("cart.$request->consumable_id", $request->all());
-            session()->save();
+            return false;
         }
+    }
 
-        return json_encode(session()->get('cart'));
+    public function buy()
+    {
+        if(Auth::check())
+        {
+            $cart = session()->get('cart');
+
+            $order = new Order; 
+            $order->user_id = Auth::id(); 
+            $order->restaurant_id = Auth::id(); 
+            $order->save();
+
+            foreach($cart as $c)
+            {
+                $newOrder = new ConsumableOrder;
+                $newOrder->order_id = $order->id;
+                $newOrder->consumable_id = $c[0]['consumable_id'];
+                $newOrder->quantity =  $c[0]['quantity'];
+                $newOrder->total_price = $c[0]['quantity']*$c[0]['price'];
+                $newOrder->save();           
+            }
+
+            session()->forget('cart');
+
+            return 'success'; 
+        }
+        else
+        {
+            return 'login please';
+        }
+          
     }
 }
+

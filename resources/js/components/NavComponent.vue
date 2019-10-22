@@ -8,7 +8,7 @@
             <h3 class="welcomeText">Welcome {{userData.name}}</span></h3>
 
             <div class="buttons" >        
-                <a v-if="user" href="#"><span>Basket</span></a>
+                <!-- <a v-if="user" href="#"><span>Basket</span></a> -->
                 <a v-if="user" href="#"><span>Order History</span></a>                
                 <a v-if="user" onclick="event.preventDefault();" @click="toggleProfile()" href="profile"><span>Edit Profile</span></a>
                 <a v-if="user" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span>Logout</span></a>

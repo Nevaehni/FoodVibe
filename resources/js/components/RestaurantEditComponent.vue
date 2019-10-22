@@ -63,7 +63,7 @@ export default {
     {
         //Order by category
         orderedConsumables: function () {
-            return _.orderBy(this.conObj.restaurant_consumables, 'category', 'desc')
+            return _.orderBy(this.conObj.restaurantconsumables, 'category', 'desc')
         },
 
         orderedAllConsumables: function () {

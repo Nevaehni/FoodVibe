@@ -12,7 +12,10 @@ Route::resource('/home', 'HomeController');
 Route::get('/restaurants', 'RestaurantController@restaurants')->name('restaurants.data');
 Route::get('/restaurant/{id}', 'RestaurantController@restaurantPage')->name('restaurant.page');
 Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->name('consumables.page');
+
+//Cart
 Route::post('/cart/product', 'RestaurantController@cartAdd')->name('cart.add');
+Route::get('/cart/buy', 'RestaurantController@buy')->name('cart.buy');
 
 
 //Restaurant Owner

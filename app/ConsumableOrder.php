@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Consumable_order extends Model
+class ConsumableOrder extends Model
 {
     public function Consumables()
     {

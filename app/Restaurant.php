@@ -11,9 +11,9 @@ class Restaurant extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function Restaurant_consumables()
+    public function RestaurantConsumables()
     {
-        return $this->hasMany('App\Restaurant_consumable');
+        return $this->hasMany('App\RestaurantConsumable');
     }
 
     public function Orders()

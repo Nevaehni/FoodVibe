@@ -13,9 +13,9 @@
                 </div>    
             </div>
 
-            <div class="foodContainer">     
+            <div class="foodContainer">                     
                 <span class="category">Main courses</span>         
-                <div class="foodContent" v-for="(con,id) in consumables.restaurant_consumables" :key="id">       
+                <div class="foodContent" v-for="(con,id) in consumables.restaurantconsumables" :key="id">       
                     <div v-if="con.category === 'main course'">
                         <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
                         <div class="title">
@@ -31,7 +31,7 @@
 
             <div class="foodContainer">
                 <span class="category">Side dishes</span>         
-                <div v-for="(con,id) in consumables.restaurant_consumables" :key="id">     
+                <div v-for="(con,id) in consumables.restaurantconsumables" :key="id">     
                     <div v-if="con.category === 'side dish'">               
                         <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
                         <div class="title">
@@ -44,10 +44,10 @@
                     </div>  
                 </div> 
             </div>
-            
+
             <div class="foodContainer">
                 <span class="category">Drinks</span>         
-                <div v-for="(con,id) in consumables.restaurant_consumables" :key="id">    
+                <div v-for="(con,id) in consumables.restaurantconsumables" :key="id">    
                     <div v-if="con.category === 'drink'">                  
                         <img :src="'../images/consumables/'+con.consumable.image" alt="Restaurant logo">               
                         <div class="title">
@@ -68,14 +68,14 @@
                         <span>Consumable id: {{cart[0].consumable_id}} </span>
                         <span>price: {{cart[0].price}} </span>
                         <span>Quantity: {{cart[0].quantity}}</span>
-                        <button @click="add(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Add</button>
-                        <button @click="remove(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Remove</button>                
+                        <!-- <button @click="add(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Add</button> -->
+                        <!-- <button @click="remove(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Remove</button>                 -->
                         <br>                      
                     </span>
-                    <button class="btn btn-primary">Buy</button>
+                    <button @click="buy()" class="btn btn-primary">Buy</button>
                 </div>           
             </div>
-            
+
         </div>
     </div>  
 </template>
@@ -111,7 +111,7 @@ export default {
     },
 
     created()
-    {      
+    {              
         //parse cart items
         if(this.cartSession != undefined)
         {
@@ -165,22 +165,36 @@ export default {
             })    
         },
 
-        //Add product 
-        add: function(restId, conId)
+        //Buy products in the cart
+        buy: function()
         {
-            axios.post(this.cartRoute, {
-                restaurant_id: restId,
-                consumable_id: conId,   
-                _token: this.csrfToken
-            }).then(response => 
+            let route = this.cartRoute.replace('product', 'buy')
+            axios.get(route).then(response => 
             {
-                console.log(response.data);        		
+                console.log(response.data)       		
             })
             .catch(err => 
             {
                 console.log('My error'+err);
             })    
-        }
+        },
+
+        // //Add product 
+        // add: function(restId, conId)
+        // {
+        //     axios.post(this.cartRoute, {
+        //         restaurant_id: restId,
+        //         consumable_id: conId,   
+        //         _token: this.csrfToken
+        //     }).then(response => 
+        //     {
+        //         console.log(response.data);        		
+        //     })
+        //     .catch(err => 
+        //     {
+        //         console.log('My error'+err);
+        //     })    
+        // }
     }
 }
 </script>

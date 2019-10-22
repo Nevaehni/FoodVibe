@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public function Consumable_orders()
+    public function ConsumableOrders()
     {
-        return $this->hasMany('App\Consumable_order');
+        return $this->hasMany('App\ConsumableOrder');
     }
     
     public function Restaurants()

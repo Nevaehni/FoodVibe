@@ -2132,18 +2132,31 @@ Vue.component('edit-component', __webpack_require__(/*! ./RestaurantEditComponen
         console.log('My error' + err);
       });
     },
-    //Add product 
-    add: function add(restId, conId) {
-      axios.post(this.cartRoute, {
-        restaurant_id: restId,
-        consumable_id: conId,
-        _token: this.csrfToken
-      }).then(function (response) {
+    //Buy products in the cart
+    buy: function buy() {
+      var route = this.cartRoute.replace('product', 'buy');
+      axios.get(route).then(function (response) {
         console.log(response.data);
       })["catch"](function (err) {
         console.log('My error' + err);
       });
-    }
+    } // //Add product 
+    // add: function(restId, conId)
+    // {
+    //     axios.post(this.cartRoute, {
+    //         restaurant_id: restId,
+    //         consumable_id: conId,   
+    //         _token: this.csrfToken
+    //     }).then(response => 
+    //     {
+    //         console.log(response.data);        		
+    //     })
+    //     .catch(err => 
+    //     {
+    //         console.log('My error'+err);
+    //     })    
+    // }
+
   }
 });
 
@@ -2220,7 +2233,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     //Order by category
     orderedConsumables: function orderedConsumables() {
-      return _.orderBy(this.conObj.restaurant_consumables, 'category', 'desc');
+      return _.orderBy(this.conObj.restaurantconsumables, 'category', 'desc');
     },
     orderedAllConsumables: function orderedAllConsumables() {
       return _.orderBy(this.allCons, 'category', 'desc');
@@ -38461,10 +38474,6 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
         _vm.user
-          ? _c("a", { attrs: { href: "#" } }, [_c("span", [_vm._v("Basket")])])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.user
           ? _c("a", { attrs: { href: "#" } }, [
               _c("span", [_vm._v("Order History")])
             ])
@@ -38819,7 +38828,7 @@ var render = function() {
                   _vm._v("Main courses")
                 ]),
                 _vm._v(" "),
-                _vm._l(_vm.consumables.restaurant_consumables, function(
+                _vm._l(_vm.consumables.restaurantconsumables, function(
                   con,
                   id
                 ) {
@@ -38877,7 +38886,7 @@ var render = function() {
                   _vm._v("Side dishes")
                 ]),
                 _vm._v(" "),
-                _vm._l(_vm.consumables.restaurant_consumables, function(
+                _vm._l(_vm.consumables.restaurantconsumables, function(
                   con,
                   id
                 ) {
@@ -38933,7 +38942,7 @@ var render = function() {
               [
                 _c("span", { staticClass: "category" }, [_vm._v("Drinks")]),
                 _vm._v(" "),
-                _vm._l(_vm.consumables.restaurant_consumables, function(
+                _vm._l(_vm.consumables.restaurantconsumables, function(
                   con,
                   id
                 ) {
@@ -39008,45 +39017,22 @@ var render = function() {
                             _vm._v("Quantity: " + _vm._s(cart[0].quantity))
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              on: {
-                                click: function($event) {
-                                  return _vm.add(
-                                    cart[0].restaurant_id,
-                                    cart[0].consumable_id
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("Add")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary",
-                              on: {
-                                click: function($event) {
-                                  return _vm.remove(
-                                    cart[0].restaurant_id,
-                                    cart[0].consumable_id
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("Remove")]
-                          ),
-                          _vm._v(" "),
                           _c("br")
                         ])
                       }),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Buy")
-                      ])
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.buy()
+                            }
+                          }
+                        },
+                        [_vm._v("Buy")]
+                      )
                     ],
                     2
                   )
