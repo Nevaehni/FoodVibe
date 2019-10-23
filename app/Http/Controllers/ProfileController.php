@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Order;
 use Auth;
 use Hash;
 
@@ -38,4 +39,33 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Updated succesfully');
     }
+
+    public function authCheck()
+    {
+        return Auth::user();
+    }
+
+    public function userOrders()
+    {        
+        $orders = Order::with('consumableorders')->where('user_id', Auth::id())->get();
+
+        $data = array();
+
+        foreach ($orders as $key) {            
+            $totalprice = 0;
+
+            foreach ($key->consumableorders as $cons) {
+                $totalprice += $cons->total_price;
+            };
+
+            $data[$key->id] = [
+                'order_id' => $key->id,
+                'order_date' => $key->created_at,               
+                'total_price' => $totalprice,               
+            ];   
+        }
+
+        return $data;
+    }   
+
 }

@@ -41,7 +41,7 @@ class RestaurantController extends Controller
                 $closed_till   = Carbon::createFromFormat('Y-m-d H:i:s', $s->closed_till, 'Europe/Amsterdam');
                     
                 // check if current time is within a range
-                if (($closed_from < $currentTime) && ($currentTime < $closed_till)) 
+                if ( $closed_from < $currentTime && $currentTime < $closed_till ) 
                 {
                     $status[$s->restaurant_id] = 'closed';
                 } 
@@ -124,6 +124,15 @@ class RestaurantController extends Controller
     {        
         if(Auth::check())
         {
+            // Check if the user is trying to order from 2 different restaurants.
+            if(!empty(session()->get('cart')))
+            {
+                if($request->restaurant_id != session()->get('cart')[key(session()->get('cart'))][0]['restaurant_id'])
+                {
+                    return "You cannot order from 2 restaurants at the same time.";
+                }
+            };
+
             //Unset the token
             unset($request['_token']);        
                 
@@ -154,13 +163,29 @@ class RestaurantController extends Controller
 
     public function buy()
     {
-        if(Auth::check())
+        if(Auth::check() && !empty(session()->get('cart')))
         {
+            
+            //Get the cart session
             $cart = session()->get('cart');
+                        
+            $restaurantSchedule = RestaurantSchedule::where('restaurant_id', $cart[key($cart)][0]['restaurant_id'])->first();
+
+            $closed_from   = Carbon::createFromFormat('Y-m-d H:i:s', $restaurantSchedule->closed_from, 'Europe/Amsterdam');
+            $closed_till   = Carbon::createFromFormat('Y-m-d H:i:s', $restaurantSchedule->closed_till, 'Europe/Amsterdam');
+
+            $currentTime = Carbon::now('Europe/Amsterdam');
+
+            //Check if the restaurant is closed and flush the cart if closed
+            if ( $closed_from < $currentTime && $currentTime < $closed_till ) 
+            {
+                session()->forget('cart');
+                return "Restaurant is closed at the moment.";
+            }
 
             $order = new Order; 
             $order->user_id = Auth::id(); 
-            $order->restaurant_id = Auth::id(); 
+            $order->restaurant_id = $cart[key($cart)][0]['restaurant_id'];
             $order->save();
 
             foreach($cart as $c)
@@ -179,7 +204,7 @@ class RestaurantController extends Controller
         }
         else
         {
-            return 'login please';
+            return 'Succesfully failed';
         }
           
     }

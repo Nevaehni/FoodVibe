@@ -35,7 +35,7 @@ export default {
         })
         .catch(err => 
         {
-            console.log('My error'+err);
+            console.log('My error '+err);
         })     
 
     },

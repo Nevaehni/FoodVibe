@@ -17,6 +17,10 @@ Route::get('/restaurant/consumables/{id}', 'RestaurantController@consumables')->
 Route::post('/cart/product', 'RestaurantController@cartAdd')->name('cart.add');
 Route::get('/cart/buy', 'RestaurantController@buy')->name('cart.buy');
 
+//Navigation bar
+Route::get('/user/orders', 'ProfileController@userOrders')->name('user.orders');
+Route::get('/authCheck', 'ProfileController@authCheck')->name('auth.check');
+Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
 
 //Restaurant Owner
 Route::get('/restaurant/consumable/all', 'RestaurantController@allConsumables')->name('consumables.all');
@@ -25,11 +29,7 @@ Route::post('/restaurant/consumable/store', 'RestaurantController@store')->name(
 Route::post('/restaurant/consumable/new', 'RestaurantController@newConsumable')->name('restaurant.new');
 Route::get('/restaurant/owner/check', 'RestaurantController@check')->name('restaurant.check');
 
-//Navigation
-Route::get('/authCheck', 'HomeController@authCheck')->name('auth.check');
-
-//Searchbar
+//Search bar
 Route::post('/search', 'HomeController@restaurantSearch')->name('restaurant.search');
 
-//Settings
-Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+

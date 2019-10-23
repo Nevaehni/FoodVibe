@@ -6,6 +6,7 @@
         route="{{ route('auth.check') }}"
         login-route="{{ route('login') }}"
         profile-update-route="{{ route('profile.update') }}"
+        orders-route="{{ route('user.orders') }}"
         img-asset="{{ asset('images') }}"
     ></nav-component>
 

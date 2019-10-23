@@ -9,9 +9,9 @@
 
             <div class="buttons" >        
                 <!-- <a v-if="user" href="#"><span>Basket</span></a> -->
-                <a v-if="user" href="#"><span>Order History</span></a>                
+                <a v-if="user" onclick="event.preventDefault();" @click="toggleOrderHistory()" href="#"><span>Order History</span></a>                
                 <a v-if="user" onclick="event.preventDefault();" @click="toggleProfile()" href="profile"><span>Edit Profile</span></a>
-                <a v-if="user" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span>Logout</span></a>
+                <a v-if="user" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="#"><span>Logout</span></a>
                 <a v-else href="#" onclick="event.preventDefault();" @click="toggleLogin()"><span>Login</span></a>
             </div>      
         </nav>
@@ -77,6 +77,16 @@
             </div>
         </form>
 
+        <!-- Order history -->
+        <div v-if="orderHistory" class="order_history">
+            <a id="close_btn" onclick="event.preventDefault();" @click="toggleOrderHistory()" href="#">X</a> 
+            <div v-for="(order, id) in userOrders" :key='id'>
+                <h1>Order id:   {{  order["order_id"] }}</h1>
+                <h1>Order date: {{  order["order_date"] }}</h1>
+                <h3>Total price:{{  order["total_price"] }}</h3>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -96,7 +106,12 @@ export default {
             csrfToken: null,
 
             //Setting edit
-            profileShow: false,                  
+            profileShow: false,  
+
+            //Orders
+            orderHistory: false,
+            userOrders: null               
+                      
         }
     },
     props: 
@@ -104,7 +119,8 @@ export default {
         route: { type: String, required: true },
         imgAsset: String,
         loginRoute: String,
-        profileUpdateRoute: String
+        profileUpdateRoute: String,
+        ordersRoute: String
     },
     created()
     {      
@@ -126,6 +142,16 @@ export default {
             console.log("My error: "+err)
         });
 
+        //Get user orders
+        axios.get(this.ordersRoute).then(response => 
+        { 		
+            this.userOrders = response.data       		
+        })
+        .catch(err => 
+        {
+            console.log('My error '+err);
+        }) 
+
         //Get CSRF token from app.blade
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
     },
@@ -133,6 +159,11 @@ export default {
         toggleLogin: function()
         {
             this.loginShow = !this.loginShow
+        },
+
+        toggleOrderHistory: function()
+        {
+            this.orderHistory = !this.orderHistory
         },
 
         toggleProfile: function()

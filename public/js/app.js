@@ -1922,6 +1922,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1935,7 +1945,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       loginShow: false,
       csrfToken: null,
       //Setting edit
-      profileShow: false
+      profileShow: false,
+      //Orders
+      orderHistory: false,
+      userOrders: null
     };
   },
   props: {
@@ -1945,7 +1958,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     },
     imgAsset: String,
     loginRoute: String,
-    profileUpdateRoute: String
+    profileUpdateRoute: String,
+    ordersRoute: String
   },
   created: function created() {
     var _this = this;
@@ -1960,6 +1974,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     })["catch"](function (err) {
       console.log("My error: " + err);
+    }); //Get user orders
+
+    axios.get(this.ordersRoute).then(function (response) {
+      _this.userOrders = response.data;
+    })["catch"](function (err) {
+      console.log('My error ' + err);
     }); //Get CSRF token from app.blade
 
     this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -1967,6 +1987,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   methods: {
     toggleLogin: function toggleLogin() {
       this.loginShow = !this.loginShow;
+    },
+    toggleOrderHistory: function toggleOrderHistory() {
+      this.orderHistory = !this.orderHistory;
     },
     toggleProfile: function toggleProfile() {
       if (this.userData.name != 'guest' && this.userData.id != 'undefined') {
@@ -2098,20 +2121,19 @@ Vue.component('edit-component', __webpack_require__(/*! ./RestaurantEditComponen
     //parse cart items
     if (this.cartSession != undefined) {
       this.cartSessionData = JSON.parse(this.cartSession);
-      console.log(this.cartSessionData);
     } //Get consumables
 
 
     axios.get('consumables/' + this.restaurant).then(function (response) {
       _this.consumables = response.data;
     })["catch"](function (err) {
-      console.log('My error' + err);
+      console.log('My error ' + err);
     }); //Check the current restaurant owner
 
     axios.get('owner/check').then(function (response) {
       _this.userRestId = response.data;
     })["catch"](function (err) {
-      console.log('My error' + err);
+      console.log('My error ' + err);
     });
     this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   },
@@ -2140,23 +2162,7 @@ Vue.component('edit-component', __webpack_require__(/*! ./RestaurantEditComponen
       })["catch"](function (err) {
         console.log('My error' + err);
       });
-    } // //Add product 
-    // add: function(restId, conId)
-    // {
-    //     axios.post(this.cartRoute, {
-    //         restaurant_id: restId,
-    //         consumable_id: conId,   
-    //         _token: this.csrfToken
-    //     }).then(response => 
-    //     {
-    //         console.log(response.data);        		
-    //     })
-    //     .catch(err => 
-    //     {
-    //         console.log('My error'+err);
-    //     })    
-    // }
-
+    }
   }
 });
 
@@ -2312,7 +2318,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.restaurants = response.data.restaurant;
       _this.restaurantStatus = response.data.time;
     })["catch"](function (err) {
-      console.log('My error' + err);
+      console.log('My error ' + err);
     });
   },
   methods: {}
@@ -6828,7 +6834,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.cart[data-v-78e2f7b6]\r\n{\r\n    background-color: white;\r\n    border: 1px black solid;\r\n    width: 460px;\r\n    height: auto;\r\n    border-radius: 35px;\r\n    padding: 1em;\r\n    position: fixed;\r\n    top: 390px;\r\n    right: 1px;\n}\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 5;\r\n    color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.title a[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    left: -9%;\r\n    width: 80%;\n}\n.category[data-v-78e2f7b6]\r\n{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n}\n.title span[data-v-78e2f7b6]:nth-of-type(2) \r\n{\r\n    float: right;\r\n    width: 150px;\r\n    border-radius: 35px;\r\n    background-color: black;\r\n    color: white;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\r\n    cursor: pointer;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.cart[data-v-78e2f7b6]\r\n{\r\n    background-color: white;\r\n    border: 1px black solid;\r\n    width: auto;\r\n    height: auto;\r\n    border-radius: 35px;\r\n    padding: 1em;\r\n    position: fixed;\r\n    top: 390px;\r\n    right: 1px;\n}\n.mainContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1364px;\r\n    min-height: 873px;\r\n    background-color: #FFB101;\r\n    margin: auto;\r\n    margin-top: 15px;\r\n    padding-bottom: 15px;\r\n    border-radius: 20px;\r\n    text-align: -webkit-center;  \r\n    border: 1px solid white;\n}\n.contentContainer[data-v-78e2f7b6], .foodContainer[data-v-78e2f7b6]\r\n{\r\n    width: 1333px;\r\n    height: 203px;    \r\n    position: relative;\r\n    background-color: white;\r\n    margin: 5px 0px 7px 0px;\r\n    top: 5px;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    border: 1px solid #707070;\r\n    text-decoration: none;\n}\n.contentContainer img[data-v-78e2f7b6], .foodContainer img[data-v-78e2f7b6]\r\n{\r\n    border-radius: 12px;   \r\n    height: 181px;\r\n    width: 181px;\r\n    -o-object-fit: scale-down;\r\n       object-fit: scale-down;   \r\n    margin: 11px 0px 11px 25px;    \r\n    flex: none;    \r\n    border: 1px solid #707070;\n}\n.title[data-v-78e2f7b6]\r\n{\r\n    max-width: 1058px;\r\n    text-align: left;\r\n    margin: 10px 0px 0px 30px;\r\n    flex: 5;\r\n    color: #707070;\n}\n.title span[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.title p[data-v-78e2f7b6]\r\n{\r\n    font-size: 15px;\r\n    margin-top: 15px;\n}\n.title a[data-v-78e2f7b6]\r\n{\r\n    font-size: 30px;\n}\n.divider[data-v-78e2f7b6]\r\n{\r\n    width: 100%;\r\n    border: 1px solid #707070;\n}\n.foodContainer[data-v-78e2f7b6]\r\n{\r\n    height: auto;\r\n    left: -9%;\r\n    width: 80%;\n}\n.category[data-v-78e2f7b6]\r\n{\r\n    background-color: black;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 18px;\r\n    padding: 13px;\r\n    width: auto;\r\n    min-width: 110px;\r\n    color: white;\r\n    font-family: \"Sitka Banner\", italic;\n}\n.title span[data-v-78e2f7b6]:nth-of-type(2) \r\n{\r\n    float: right;\r\n    width: 150px;\r\n    border-radius: 35px;\r\n    background-color: black;\r\n    color: white;\r\n    position: relative;\r\n    align-self: center;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    font-family: 'Sitka Banner', italic;\r\n    font-size: 20px;\r\n    border: 1px solid #707070;\r\n    cursor: pointer;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -38474,9 +38480,18 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "buttons" }, [
         _vm.user
-          ? _c("a", { attrs: { href: "#" } }, [
-              _c("span", [_vm._v("Order History")])
-            ])
+          ? _c(
+              "a",
+              {
+                attrs: { onclick: "event.preventDefault();", href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.toggleOrderHistory()
+                  }
+                }
+              },
+              [_c("span", [_vm._v("Order History")])]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.user
@@ -38499,9 +38514,9 @@ var render = function() {
               "a",
               {
                 attrs: {
-                  href: "#",
                   onclick:
-                    "event.preventDefault(); document.getElementById('logout-form').submit();"
+                    "event.preventDefault(); document.getElementById('logout-form').submit();",
+                  href: "#"
                 }
               },
               [_c("span", [_vm._v("Logout")])]
@@ -38670,6 +38685,46 @@ var render = function() {
             _vm._v(" "),
             _vm._m(3)
           ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.orderHistory
+      ? _c(
+          "div",
+          { staticClass: "order_history" },
+          [
+            _c(
+              "a",
+              {
+                attrs: {
+                  id: "close_btn",
+                  onclick: "event.preventDefault();",
+                  href: "#"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.toggleOrderHistory()
+                  }
+                }
+              },
+              [_vm._v("X")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.userOrders, function(order, id) {
+              return _c("div", { key: id }, [
+                _c("h1", [_vm._v("Order id:   " + _vm._s(order["order_id"]))]),
+                _vm._v(" "),
+                _c("h1", [
+                  _vm._v("Order date: " + _vm._s(order["order_date"]))
+                ]),
+                _vm._v(" "),
+                _c("h3", [
+                  _vm._v("Total price:" + _vm._s(order["total_price"]))
+                ])
+              ])
+            })
+          ],
+          2
         )
       : _vm._e()
   ])

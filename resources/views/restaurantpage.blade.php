@@ -5,7 +5,8 @@
     <nav-component 
         route="{{ route('auth.check') }}"
         login-route="{{ route('login') }}"
-        img-asset="{{ asset('images') }}"       
+        orders-route="{{ route('user.orders') }}"
+        img-asset="{{ asset('images') }}"              
     ></nav-component>
 
     <search-component
@@ -20,6 +21,4 @@
         cart-session= @json(session()->get('cart'))
     ></restaurantpage-component>
     
-  
-
 @endsection

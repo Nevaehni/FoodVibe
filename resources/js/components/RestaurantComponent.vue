@@ -69,7 +69,7 @@
                         <span>price: {{cart[0].price}} </span>
                         <span>Quantity: {{cart[0].quantity}}</span>
                         <!-- <button @click="add(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Add</button> -->
-                        <!-- <button @click="remove(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Remove</button>                 -->
+                        <!-- <button @click="remove(cart[0].restaurant_id, cart[0].consumable_id)" class="btn btn-primary">Remove</button> -->
                         <br>                      
                     </span>
                     <button @click="buy()" class="btn btn-primary">Buy</button>
@@ -116,7 +116,6 @@ export default {
         if(this.cartSession != undefined)
         {
             this.cartSessionData = JSON.parse(this.cartSession)
-            console.log(this.cartSessionData)
         }
         
         //Get consumables
@@ -127,7 +126,7 @@ export default {
         })
         .catch(err => 
         {
-            console.log('My error'+err);
+            console.log('My error '+err);
         })    
 
         //Check the current restaurant owner
@@ -138,7 +137,7 @@ export default {
         })
         .catch(err => 
         {
-            console.log('My error'+err);
+            console.log('My error '+err);
         })            
 
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
@@ -178,23 +177,6 @@ export default {
                 console.log('My error'+err);
             })    
         },
-
-        // //Add product 
-        // add: function(restId, conId)
-        // {
-        //     axios.post(this.cartRoute, {
-        //         restaurant_id: restId,
-        //         consumable_id: conId,   
-        //         _token: this.csrfToken
-        //     }).then(response => 
-        //     {
-        //         console.log(response.data);        		
-        //     })
-        //     .catch(err => 
-        //     {
-        //         console.log('My error'+err);
-        //     })    
-        // }
     }
 }
 </script>
@@ -204,7 +186,7 @@ export default {
 {
     background-color: white;
     border: 1px black solid;
-    width: 460px;
+    width: auto;
     height: auto;
     border-radius: 35px;
     padding: 1em;
