@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\RestaurantConsumable;
 use Illuminate\Http\Request;
 use App\RestaurantSchedule;
-use App\RestaurantConsumable;
 use App\ConsumableOrder;
 use App\Restaurant;
 use App\Consumable;
+use Carbon\Carbon;
 use App\Order;
 use App\User;
-use Carbon\Carbon;
 use DateTime;
-use Auth;
 use StdClass;
+use Auth;
 
 class RestaurantController extends Controller
-{
+{    
     public function restaurants()
     {       
         $currentTime = Carbon::now('Europe/Amsterdam');
