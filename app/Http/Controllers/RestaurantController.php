@@ -182,12 +182,23 @@ class RestaurantController extends Controller
                 session()->forget('cart');
                 return "Restaurant is closed at the moment.";
             }
+            
 
+            $total = 0;
+            //Count the total price
+            foreach($cart as $cc)
+            {
+                $total += $cc[0]['quantity']*$cc[0]['price'];
+            }
+
+            //Save in orders
             $order = new Order; 
             $order->user_id = Auth::id(); 
             $order->restaurant_id = $cart[key($cart)][0]['restaurant_id'];
+            $order->total = $total;
             $order->save();
 
+            //Save in consumable orders
             foreach($cart as $c)
             {
                 $newOrder = new ConsumableOrder;

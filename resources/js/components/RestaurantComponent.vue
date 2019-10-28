@@ -156,7 +156,8 @@ export default {
                 _token: this.csrfToken
             }).then(response => 
             {
-                this.cartSessionData = JSON.parse(response.data);        		
+                this.cartSessionData = JSON.parse(response.data);        
+
             })
             .catch(err => 
             {

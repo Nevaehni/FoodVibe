@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'city' => 'amsterdam',
             'phone' => '0611223344',
             'email' => '341089@talnet.nl',
+            'role' => 'admin',
             'password' => bcrypt('123456789')
         ]);
 

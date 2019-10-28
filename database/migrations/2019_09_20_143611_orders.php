@@ -17,6 +17,7 @@ class Orders extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('restaurant_id');
+            $table->integer('total');
             $table->timestamps();
         });
     }

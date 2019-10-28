@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ConsumableOrder extends Model
 {
-    public function Consumables()
+    public function Consumable()
     {
         return $this->belongsTo('App\Consumable');
     }
