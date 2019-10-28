@@ -1,4 +1,3 @@
 <?php
 
-// Route::resource('admin', 'AdminController')->middleware('is_admin');
-Route::resource('admin', 'AdminController');
+Route::resource('admin', 'AdminController')->middleware('is_admin');
