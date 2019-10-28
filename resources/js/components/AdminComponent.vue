@@ -1,8 +1,8 @@
 <template>
 <div class="manage_users">
-   <button @click="ajax()"></button>
+   <button @click="ajax()">Click me to load</button>
 
-    <div v-html="conTable">
+    <div v-for="(con, id) in conTable" :key="id" v-html="con">
 
     </div>
   
@@ -44,6 +44,7 @@ export default {
             axios.get('admin/show').then(response => 
             {
                 this.conTable = response.data     		
+                console.log(response.data);  		
             })
             .catch(err => 
             {
@@ -56,15 +57,7 @@ export default {
 </script>
 
 <style>
-    body, html
-    {
-        background-color: white !important;
-    }
+  
 
-    .panel-heading span
-    {
-        color: #fff;
-        background-color: #343a40;
-        padding: 0 10px 0 10px;
-    }
+    
 </style>

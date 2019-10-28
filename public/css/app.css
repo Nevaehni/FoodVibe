@@ -10792,6 +10792,14 @@ a.text-dark:focus {
   border-radius: 25px;
 }
 
+.panel-heading div {
+  background-color: #343A40;
+  color: white;
+  padding: 5px;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
 html,
 body {
   background-color: black;

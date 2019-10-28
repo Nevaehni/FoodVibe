@@ -51,28 +51,25 @@ class AdminController extends Controller
     {
         $userId = Auth::id();
 
-        $data = User::with('orders.consumableOrders.consumable')->where('id', $userId)->first();
-            
-        $consumable = null;
-        $content = "";
-        $header = "";
+        $data = User::with('orders.consumableOrders.consumable')->where('id', $userId)->first();                    
+          
         //Get data for every consumable
-
-        $restName = Restaurant::find($data->id)->title;
+        $ccData = [];
         foreach ($data->orders as $ii => $vv) 
-        {                
-            foreach ($vv->consumableOrders as $key => $value) 
-            {
-                $content .= 
-                '
-                <div class="panel-group col-md-4">
+        {    
+            $restName = Restaurant::find($vv->restaurant_id)->title;
+
+            $content = '                
+                <div class="panel-group col-md-6">
                     <div class="panel panel-default">
                         
                         <div class="panel-heading">                
-                            <span data-toggle="collapse" href="#collapse1"></span>
+                            <div data-toggle="collapse" href="#collapse'.$vv->consumableOrders[0]->order_id.'">
+                                Order number: '.$vv->consumableOrders[0]->order_id.' - Order day: '.$vv->consumableOrders[0]->created_at->format('d/m/Y').' - Restaurant: '.$restName.' - Total Price: € '.$vv->total.'
+                            </div>
                         </div>
 
-                        <div id="collapse1" class="panel-collapse collapse">
+                        <div id="collapse'.$vv->consumableOrders[0]->order_id.'" class="panel-collapse collapse">
                         
                             <table class="table table-dark">
                                 <thead>
@@ -81,36 +78,39 @@ class AdminController extends Controller
                                         <th scope="col">Quantity</th>
                                         <th scope="col">P.P.P</th>
                                         <th scope="col">Category</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col">Price</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>'.$value->consumable->title.'</td>
-                                    <td>'.$value->quantity.'</td>
-                                    <td>'.$value->total_price/$value->quantity.'</td>
-                                    <td>'.$value->consumable->category.'</td>
-                                    <td>'.$value->total_price.'</td>                    
-                                </tr>
+                                <tbody>';  
                                
-                                </tbody>
-                            </table>
-                        </div>
+          
+            foreach ($vv->consumableOrders as $key => $value) 
+            {
+                $content .= '    
+                    <tr>
+                        <td>'.$value->consumable->title.'</td>
+                        <td>'.$value->quantity.'</td>
+                        <td>€ '.$value->total_price/$value->quantity.'</td>
+                        <td>'.$value->consumable->category.'</td>
+                        <td>€ '.$value->total_price.'</td>                    
+                    </tr>
+               
+                ';      
+                
+            }  
+
+            $content .='    
+                        </tbody>
+                        </table>
                     </div>
                 </div>
-                ';                
-            }               
+            </div>';
+            
+            $ccData[$vv->consumableOrders[0]->order_id] = $content;
         }
-        
-        
-        
-        
 
-        
-
-        return $content;
-        // return json_encode(array($content, $header));
+        // dd($ccData);
+        return $ccData;
     }
 
     /**
