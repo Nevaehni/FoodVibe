@@ -1852,29 +1852,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       userData: null,
-      conTable: null
+      conTable: null,
+      csrfToken: null
     };
   },
-  props: {// users: undefined,
+  props: {
+    users: undefined
   },
-  created: function created() {// this.userData = JSON.parse(this.users)
+  created: function created() {
+    this.userData = JSON.parse(this.users);
+    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   },
-  computed: {},
   methods: {
-    ajax: function ajax() {
+    //Get orders of user
+    getOrdersAjax: function getOrdersAjax() {
       var _this = this;
 
-      axios.get('admin/show').then(function (response) {
+      axios.get('admin/show', {
+        params: {
+          user_id: event.target.value
+        }
+      }).then(function (response) {
         _this.conTable = response.data;
-        console.log(response.data);
       })["catch"](function (err) {
         console.log('My error' + err);
       });
+    },
+    //Delete order
+    deleteOrderAjax: function deleteOrderAjax(orderid) {
+      axios["delete"]('admin/' + orderid);
     }
   }
 });
@@ -38580,19 +38594,46 @@ var render = function() {
     { staticClass: "manage_users" },
     [
       _c(
-        "button",
+        "select",
         {
           on: {
-            click: function($event) {
-              return _vm.ajax()
+            change: function($event) {
+              return _vm.getOrdersAjax($event)
             }
           }
         },
-        [_vm._v("Click me to load")]
+        [
+          _c("option", { attrs: { disabled: "", selected: "" } }, [
+            _vm._v("Select user")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.userData, function(user, id) {
+            return _c("option", { key: id, domProps: { value: user.id } }, [
+              _vm._v(_vm._s(user.name))
+            ])
+          })
+        ],
+        2
       ),
       _vm._v(" "),
       _vm._l(_vm.conTable, function(con, id) {
-        return _c("div", { key: id, domProps: { innerHTML: _vm._s(con) } })
+        return _c("div", { key: id, staticClass: "panel-group col-md-12" }, [
+          _c("div", { domProps: { innerHTML: _vm._s(con) } }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "deleteOrder",
+              attrs: { onclick: "return confirm('are you sure?')" },
+              on: {
+                click: function($event) {
+                  return _vm.deleteOrderAjax(id)
+                }
+              }
+            },
+            [_vm._v("Delete order")]
+          )
+        ])
       })
     ],
     2

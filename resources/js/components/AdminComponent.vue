@@ -1,11 +1,14 @@
 <template>
 <div class="manage_users">
-   <button @click="ajax()">Click me to load</button>
-
-    <div v-for="(con, id) in conTable" :key="id" v-html="con">
-
-    </div>
-  
+    <select @change="getOrdersAjax($event)">
+        <option disabled selected>Select user</option>
+        <option v-for="(user, id) in userData" :key="id" :value="user.id">{{user.name}}</option>
+    </select>
+    
+    <div class="panel-group col-md-12" v-for="(con, id) in conTable" :key="id">
+            <div v-html="con"></div>
+            <div onclick="return confirm('are you sure?')" @click="deleteOrderAjax(id)" class="deleteOrder">Delete order</div>
+    </div>  
     
 </div>
 </template>
@@ -19,37 +22,45 @@ export default {
         return{
             userData: null,
             conTable: null,
+            csrfToken: null,
         }
     },
 
     props:
     {
-        // users: undefined,
+        users: undefined,
     },
 
     created()
     {        
-        // this.userData = JSON.parse(this.users)
-    },
+        this.userData = JSON.parse(this.users)
 
-    computed:
-    {
-        
+        this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
     },
 
     methods:
     {
-        ajax: function()
+        //Get orders of user
+        getOrdersAjax: function()
         {
-            axios.get('admin/show').then(response => 
+            axios.get('admin/show', {
+                params: {
+                    user_id: event.target.value
+                }
+            }).then(response => 
             {
-                this.conTable = response.data     		
-                console.log(response.data);  		
-            })
+                this.conTable = response.data     
+            })            
             .catch(err => 
             {
                 console.log('My error'+err);
             })    
+        },
+
+        //Delete order
+        deleteOrderAjax: function(orderid)
+        {
+            axios.delete('admin/'+orderid);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Order;
 use App\User;
 use Carbon\Carbon;
 use Auth;
@@ -17,7 +18,7 @@ class AdminController extends Controller
      */
     public function index()
     {        
-        return view('admin');
+        return view('admin')->with('users', User::all());
     }
 
     /**
@@ -47,9 +48,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        $userId = Auth::id();
+        $userId = $request->user_id;
 
         $data = User::with('orders.consumableOrders.consumable')->where('id', $userId)->first();                    
           
@@ -59,13 +60,12 @@ class AdminController extends Controller
         {    
             $restName = Restaurant::find($vv->restaurant_id)->title;
 
-            $content = '                
-                <div class="panel-group col-md-6">
+            $content = '      
                     <div class="panel panel-default">
                         
                         <div class="panel-heading">                
                             <div data-toggle="collapse" href="#collapse'.$vv->consumableOrders[0]->order_id.'">
-                                Order number: '.$vv->consumableOrders[0]->order_id.' - Order day: '.$vv->consumableOrders[0]->created_at->format('d/m/Y').' - Restaurant: '.$restName.' - Total Price: € '.$vv->total.'
+                                Order number: '.$vv->consumableOrders[0]->order_id.' - Order day: '.$vv->consumableOrders[0]->created_at->format('d/m/Y').' - Restaurant: '.$restName.'<span style="float:right;"> Total Price: € '.$vv->total.'</span>
                             </div>
                         </div>
 
@@ -102,14 +102,12 @@ class AdminController extends Controller
             $content .='    
                         </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>';
+                    </div>                    
+                </div>';
             
             $ccData[$vv->consumableOrders[0]->order_id] = $content;
         }
-
-        // dd($ccData);
+        
         return $ccData;
     }
 
@@ -143,7 +141,9 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {       
+        $order = Order::find($id);
+        $order->ConsumableOrders()->delete();
+        $order->delete();
     }
 }
