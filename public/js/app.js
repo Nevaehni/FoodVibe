@@ -1834,64 +1834,9 @@ module.exports = {
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdminComponent.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var os__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! os */ "./node_modules/os-browserify/browser.js");
-/* harmony import */ var os__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      userData: null,
-      conTable: null,
-      csrfToken: null
-    };
-  },
-  props: {
-    users: undefined
-  },
-  created: function created() {
-    this.userData = JSON.parse(this.users);
-    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-  },
-  methods: {
-    //Get orders of user
-    getOrdersAjax: function getOrdersAjax() {
-      var _this = this;
-
-      axios.get('admin/show', {
-        params: {
-          user_id: event.target.value
-        }
-      }).then(function (response) {
-        _this.conTable = response.data;
-      })["catch"](function (err) {
-        console.log('My error' + err);
-      });
-    },
-    //Delete order
-    deleteOrderAjax: function deleteOrderAjax(orderid) {
-      axios["delete"]('admin/' + orderid);
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\laragon\\www\\FoodVibe\\resources\\js\\components\\AdminComponent.vue: Unexpected token, expected \",\" (69:9)\n\n\u001b[0m \u001b[90m 67 | \u001b[39m                \u001b[0m\n\u001b[0m \u001b[90m 68 | \u001b[39m            })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 69 | \u001b[39m        }z\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 70 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 71 | \u001b[39m}\u001b[0m\n\u001b[0m \u001b[90m 72 | \u001b[39m\u001b[0m\n    at Parser.raise (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:6420:17)\n    at Parser.unexpected (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:7773:16)\n    at Parser.expect (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:7759:28)\n    at Parser.parseObj (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9305:14)\n    at Parser.parseExprAtom (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8939:28)\n    at Parser.parseExprSubscripts (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8556:23)\n    at Parser.parseMaybeUnary (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8536:21)\n    at Parser.parseExprOps (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8402:23)\n    at Parser.parseMaybeConditional (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8375:23)\n    at Parser.parseMaybeAssign (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8325:21)\n    at Parser.parseObjectProperty (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9441:101)\n    at Parser.parseObjPropValue (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9466:101)\n    at Parser.parseObjectMember (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9390:10)\n    at Parser.parseObj (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9314:25)\n    at Parser.parseExprAtom (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8939:28)\n    at Parser.parseExprSubscripts (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8556:23)\n    at Parser.parseMaybeUnary (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8536:21)\n    at Parser.parseExprOps (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8402:23)\n    at Parser.parseMaybeConditional (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8375:23)\n    at Parser.parseMaybeAssign (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:8325:21)\n    at Parser.parseExportDefaultExpression (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:11187:24)\n    at Parser.parseExport (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:11088:31)\n    at Parser.parseStatementContent (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:10113:27)\n    at Parser.parseStatement (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:10009:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:10585:25)\n    at Parser.parseBlockBody (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:10572:10)\n    at Parser.parseTopLevel (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:9940:10)\n    at Parser.parse (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:11447:17)\n    at parse (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\parser\\lib\\index.js:11483:38)\n    at parser (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:168:34)\n    at normalizeFile (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:102:11)\n    at runSync (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\core\\lib\\transformation\\index.js:44:43)\n    at runAsync (C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\core\\lib\\transformation\\index.js:35:14)\n    at C:\\laragon\\www\\FoodVibe\\node_modules\\@babel\\core\\lib\\transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
 
 /***/ }),
 
@@ -34799,66 +34744,6 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./node_modules/os-browserify/browser.js":
-/*!***********************************************!*\
-  !*** ./node_modules/os-browserify/browser.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-exports.endianness = function () { return 'LE' };
-
-exports.hostname = function () {
-    if (typeof location !== 'undefined') {
-        return location.hostname
-    }
-    else return '';
-};
-
-exports.loadavg = function () { return [] };
-
-exports.uptime = function () { return 0 };
-
-exports.freemem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.totalmem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.cpus = function () { return [] };
-
-exports.type = function () { return 'Browser' };
-
-exports.release = function () {
-    if (typeof navigator !== 'undefined') {
-        return navigator.appVersion;
-    }
-    return '';
-};
-
-exports.networkInterfaces
-= exports.getNetworkInterfaces
-= function () { return {} };
-
-exports.arch = function () { return 'javascript' };
-
-exports.platform = function () { return 'browser' };
-
-exports.tmpdir = exports.tmpDir = function () {
-    return '/tmp';
-};
-
-exports.EOL = '\n';
-
-exports.homedir = function () {
-	return '/'
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -38623,7 +38508,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "deleteOrder",
+              class: "deleteOrder button" + id,
               attrs: { onclick: "return confirm('are you sure?')" },
               on: {
                 click: function($event) {

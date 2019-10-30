@@ -1,5 +1,6 @@
 <template>
 <div class="manage_users">
+
     <select @change="getOrdersAjax($event)">
         <option disabled selected>Select user</option>
         <option v-for="(user, id) in userData" :key="id" :value="user.id">{{user.name}}</option>
@@ -7,22 +8,19 @@
     
     <div class="panel-group col-md-12" v-for="(con, id) in conTable" :key="id">
             <div v-html="con"></div>
-            <div onclick="return confirm('are you sure?')" @click="deleteOrderAjax(id)" class="deleteOrder">Delete order</div>
+            <div onclick="return confirm('are you sure?')" @click="deleteOrderAjax(id)" :class="'deleteOrder button'+id">Delete order</div>
     </div>  
     
 </div>
 </template>
 
 <script>
-import { userInfo } from 'os'
-
 export default {
     data()
     {
         return{
             userData: null,
             conTable: null,
-            csrfToken: null,
         }
     },
 
@@ -34,8 +32,6 @@ export default {
     created()
     {        
         this.userData = JSON.parse(this.users)
-
-        this.csrfToken = document.querySelector('meta[name="csrf-token"]').content
     },
 
     methods:
@@ -60,15 +56,15 @@ export default {
         //Delete order
         deleteOrderAjax: function(orderid)
         {
-            axios.delete('admin/'+orderid);
-        }
+            axios.delete('admin/'+orderid)
+            .then(response =>{
+
+                $('.order'+orderid).hide();
+                $('.button'+orderid).hide();   
+                
+            });
+        }z
     }
 }
 
 </script>
-
-<style>
-  
-
-    
-</style>

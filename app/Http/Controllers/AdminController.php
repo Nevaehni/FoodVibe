@@ -61,7 +61,7 @@ class AdminController extends Controller
             $restName = Restaurant::find($vv->restaurant_id)->title;
 
             $content = '      
-                    <div class="panel panel-default">
+                    <div class="panel panel-default order'.$vv->consumableOrders[0]->order_id.'">
                         
                         <div class="panel-heading">                
                             <div data-toggle="collapse" href="#collapse'.$vv->consumableOrders[0]->order_id.'">
