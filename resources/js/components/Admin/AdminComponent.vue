@@ -1,20 +1,23 @@
 <template>
 <div class="manage_users">
-
-    <select @change="getOrdersAjax($event)">
+    <users-component></users-component>
+    
+    <!-- <select @change="getOrdersAjax($event)">
         <option disabled selected>Select user</option>
         <option v-for="(user, id) in userData" :key="id" :value="user.id">{{user.name}}</option>
     </select>
     
     <div class="panel-group col-md-12" v-for="(con, id) in conTable" :key="id">
-            <div v-html="con"></div>
-            <div onclick="return confirm('are you sure?')" @click="deleteOrderAjax(id)" :class="'deleteOrder button'+id">Delete order</div>
-    </div>  
+        <div v-html="con"></div>
+        <div onclick="return confirm('are you sure?')" @click="deleteOrderAjax(id)" :class="'deleteOrder button'+id">Delete order</div>
+    </div>   -->
     
 </div>
 </template>
 
 <script>
+Vue.component('users-component', require('./Partials/UsersComponent.vue').default);
+
 export default {
     data()
     {
@@ -49,7 +52,7 @@ export default {
             })            
             .catch(err => 
             {
-                console.log('My error'+err);
+                console.log('My error '+err);
             })    
         },
 
@@ -63,7 +66,7 @@ export default {
                 $('.button'+orderid).hide();   
                 
             });
-        }z
+        }
     }
 }
 
