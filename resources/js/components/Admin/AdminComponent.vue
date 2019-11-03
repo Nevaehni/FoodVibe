@@ -1,6 +1,7 @@
 <template>
 <div class="manage_users">
-    <users-component></users-component>
+    <users-component :key="userKey"></users-component>   
+    <!-- <consumables-component></consumables-component> -->
     
     <!-- <select @change="getOrdersAjax($event)">
         <option disabled selected>Select user</option>
@@ -17,6 +18,8 @@
 
 <script>
 Vue.component('users-component', require('./Partials/UsersComponent.vue').default);
+Vue.component('consumables-component', require('./Partials/ConsumablesComponent.vue').default);
+
 
 export default {
     data()
@@ -24,6 +27,7 @@ export default {
         return{
             userData: null,
             conTable: null,
+            userKey: 0,
         }
     },
 
@@ -39,34 +43,38 @@ export default {
 
     methods:
     {
-        //Get orders of user
-        getOrdersAjax: function()
+        userReRender()        
         {
-            axios.get('admin/show', {
-                params: {
-                    user_id: event.target.value
-                }
-            }).then(response => 
-            {
-                this.conTable = response.data     
-            })            
-            .catch(err => 
-            {
-                console.log('My error '+err);
-            })    
-        },
-
-        //Delete order
-        deleteOrderAjax: function(orderid)
-        {
-            axios.delete('admin/'+orderid)
-            .then(response =>{
-
-                $('.order'+orderid).hide();
-                $('.button'+orderid).hide();   
-                
-            });
+            this.userKey += 1;  
         }
+        //Get orders of user
+        // getOrdersAjax: function()
+        // {
+        //     axios.get('admin/show', {
+        //         params: {
+        //             user_id: event.target.value
+        //         }
+        //     }).then(response => 
+        //     {
+        //         this.conTable = response.data     
+        //     })            
+        //     .catch(err => 
+        //     {
+        //         console.log('My error '+err);
+        //     })    
+        // },
+
+        // //Delete order
+        // deleteOrderAjax: function(orderid)
+        // {
+        //     axios.delete('admin/'+orderid)
+        //     .then(response =>{
+
+        //         $('.order'+orderid).hide();
+        //         $('.button'+orderid).hide();   
+                
+        //     });
+        // }
     }
 }
 

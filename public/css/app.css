@@ -10796,7 +10796,39 @@ a.text-dark:focus {
   height: 100%;
   width: 100%;
   display: grid;
+  grid-template: auto/auto auto;
   grid-template-areas: "u o o" "r rc c";
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  background-color: red;
+}
+
+.head_container {
+  display: flex;
+  padding: 10px;
+}
+
+.head_container span {
+  margin: auto;
+}
+
+.users_card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  grid-area: u;
+}
+
+.users_body {
+  padding: 5px;
+}
+
+.users_body div table {
+  color: black;
+}
+
+.table {
+  margin-bottom: 0px;
 }
 
 html,

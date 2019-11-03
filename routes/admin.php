@@ -1,4 +1,5 @@
 <?php
 
 Route::resource('admin', 'Admin\AdminController');
-Route::resource('user', 'Admin\UserController');
+Route::resource('users', 'Admin\UserController');
+Route::resource('consumables', 'Admin\UserController');

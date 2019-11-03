@@ -1,4 +1,4 @@
-<span class="card-header text-center font-weight-bold text-uppercase py-1">Edit user</span>
+{{-- <span class="card-header text-center font-weight-bold text-uppercase py-1">Edit user</span>
 <div class="users_body" style="background-color: white;">
     <div id="table">
         <table class="table table-bordered table-responsive-md table-striped text-center">
@@ -90,4 +90,4 @@
         </div>
     </div>
 @endforeach
-
+ --}}

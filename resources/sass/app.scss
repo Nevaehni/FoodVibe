@@ -9,7 +9,10 @@
 
 //CustomCSS
 @import 'navbar';
-@import 'admin';
+
+//Admin page
+@import 'admin/adminPage';
+@import 'admin/users';
 
 
 html, body

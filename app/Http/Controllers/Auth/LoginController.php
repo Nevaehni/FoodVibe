@@ -28,12 +28,16 @@ class LoginController extends Controller
      */
     // protected $redirectTo = '/home';
 
-    public function redirectTo(){
+    public function redirectTo()
+    {
         if(Auth::user()->role == 'admin')
         {
             return '/admin';
         }
-        return '/home';
+        else
+        {
+            return '/home';
+        }           
     }
 
     /**

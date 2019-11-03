@@ -15,17 +15,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('renderPartials\usersComponent')->with('user', User::all())->render();
+        return User::all();
     }
 
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
     {
-        //
+        
+        $request = $request->all();
+
+        if($request['password'])
+        {            
+            $request['password'] = bcrypt($request['password']);            
+        }
+
+        $newUser = new User;    
+        $newUser->fill(array_filter($request))->save();
+
     }
 
     public function show($id)
@@ -40,11 +50,27 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $request = $request->all();
+
+        if($request['password'])
+        {            
+            $request['password'] = bcrypt($request['password']);            
+        }
+
+        $userFind = User::find($id);    
+        $userFind->fill(array_filter($request))->save();
+        
+        $arr = [
+            $id,
+            $request['name'], 
+        ];
+        
+        return $arr;
     }
 
     public function destroy($id)
     {
-        //
+        $user = user::find($id);
+        $user->delete();
     }
 }

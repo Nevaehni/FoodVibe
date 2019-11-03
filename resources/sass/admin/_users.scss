@@ -1,0 +1,33 @@
+.head_container
+{
+    display: flex;
+    padding: 10px;
+}
+
+.head_container span
+{
+   margin: auto;
+}
+
+.users_card
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    grid-area: u;
+}
+
+.users_body
+{
+    padding: 5px;
+}
+
+.users_body div table
+{
+    color: black;
+}
+
+.table
+{
+    margin-bottom: 0px;
+}

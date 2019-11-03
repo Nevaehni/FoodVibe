@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Consumable;
 
 class ConsumableController extends Controller
 {
@@ -14,7 +15,7 @@ class ConsumableController extends Controller
      */
     public function index()
     {
-        //
+        return Consumable::all();
     }
 
     /**
