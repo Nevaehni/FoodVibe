@@ -1,30 +1,19 @@
-.head_container
-{
-    display: flex;
-    padding: 10px;
-}
-
-.head_container span
-{
-   margin: auto;
-}
-
-.users_card
+.consumables_card
 {
     display: flex;
     flex-direction: column;
     background-color: white;
-    grid-area: u;
+    grid-area: o;
     overflow: scroll;
     height: 50vh;
 }
 
-.users_body
+.consumables_body
 {
     padding: 5px;
 }
 
-.users_body div table
+.consumables_body div table
 {
     color: black;
 }

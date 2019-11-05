@@ -2,6 +2,6 @@
 
 @section('content') 
 
-<admin-component users="{{ $users }}"></admin-component>
+<admin-component></admin-component>
 
 @endsection

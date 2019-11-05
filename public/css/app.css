@@ -10793,11 +10793,11 @@ a.text-dark:focus {
 }
 
 .manage_users {
-  height: 100%;
+  height: 50vh;
   width: 100%;
   display: grid;
   grid-template: auto/auto auto;
-  grid-template-areas: "u o o" "r rc c";
+  grid-template-areas: "u u o o" "r rc c c";
   -moz-column-gap: 10px;
        column-gap: 10px;
   background-color: red;
@@ -10817,6 +10817,8 @@ a.text-dark:focus {
   flex-direction: column;
   background-color: white;
   grid-area: u;
+  overflow: scroll;
+  height: 50vh;
 }
 
 .users_body {
@@ -10824,6 +10826,27 @@ a.text-dark:focus {
 }
 
 .users_body div table {
+  color: black;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.consumables_card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  grid-area: o;
+  overflow: scroll;
+  height: 50vh;
+}
+
+.consumables_body {
+  padding: 5px;
+}
+
+.consumables_body div table {
   color: black;
 }
 

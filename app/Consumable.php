@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consumable extends Model
 {
+    protected $fillable = [
+        'title', 'image', 'category'
+    ];
+
     public function RestaurantConsumables()
     {
         return $this->belongsToMany('App\RestaurantConsumable');

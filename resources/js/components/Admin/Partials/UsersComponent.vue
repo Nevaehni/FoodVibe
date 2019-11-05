@@ -3,7 +3,7 @@
     <div class="users_card">
         <div class="head_container">
             <span class="text-center font-weight-bold text-uppercase">Users list</span>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">Add new user</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">New user</button>
         </div>
         
         <div class="users_body" style="background-color: white;">
