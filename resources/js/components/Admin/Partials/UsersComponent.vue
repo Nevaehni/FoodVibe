@@ -6,7 +6,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">New user</button>
         </div>
         
-        <div class="users_body" style="background-color: white;">
+        <div class="admin_partial_body" style="background-color: white;">
             <div id="table">
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>

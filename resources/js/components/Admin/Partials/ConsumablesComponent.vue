@@ -6,7 +6,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#newConsumableModal">New consumable</button>
         </div>
         
-        <div class="consumables_body" style="background-color: white;">
+        <div class="admin_partial_body" style="background-color: white;">
             <div id="table">
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
@@ -19,14 +19,14 @@
 
                     <!-- consumables  -->
                     <tbody>                  
-                            <tr v-for="(u, id) in consumables" :key="id" :class="'consumable'+u.id">                        
-                                <td :class="'consumable_id_'+u.id">{{u.id}}</td>
-                                <td :class="'consumable_name_'+u.id">{{u.title}}</td>
-                                <td>
-                                    <button type="button" data-toggle="modal" :data-target="'#consumableModal'+u.id" class="btn btn-success btn-rounded edit_btn">Edit</button>
-                                    <button type="button" class="btn btn-danger btn-rounded remove_btn" @click="deleteConsumable(u.id)">Remove</button>                                  
-                                </td>
-                            </tr>
+                        <tr v-for="(u, id) in consumables" :key="id" :class="'consumable'+u.id">                        
+                            <td :class="'consumable_id_'+u.id">{{u.id}}</td>
+                            <td :class="'consumable_name_'+u.id">{{u.title}}</td>
+                            <td>
+                                <button type="button" data-toggle="modal" :data-target="'#consumableModal'+u.id" class="btn btn-success btn-rounded edit_btn">Edit</button>
+                                <button type="button" class="btn btn-danger btn-rounded remove_btn" @click="deleteConsumable(u.id)">Remove</button>                                  
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

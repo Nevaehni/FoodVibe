@@ -3,9 +3,64 @@
     display: grid;
     grid-template: auto / auto auto;
     grid-template-areas: 
-        "u u o o"
-        "r rc c c";
+        "u o"
+        "r c";
     column-gap: 10px;
     row-gap: 10px;
     margin: 1px;
+}
+
+.users_card, .consumables_card, .restaurants_card, .orders_card
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: scroll;
+    height: 49vh;
+}
+
+.admin_partial_body
+{
+    padding: 5px;
+}
+
+.admin_partial_body div table
+{
+    color: black;
+}
+
+.table
+{
+    margin-bottom: 0px;
+}
+
+.head_container
+{
+    display: flex;
+    padding: 10px;
+}
+
+.head_container span
+{
+   margin: auto;
+}
+
+.users_card
+{
+    grid-area: u;
+}
+
+.orders_card
+{
+    grid-area: o;
+}
+
+.restaurants_card
+{
+    grid-area: r;
+}
+
+.consumables_card
+{
+    grid-area: c;
 }
