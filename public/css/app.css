@@ -10793,14 +10793,13 @@ a.text-dark:focus {
 }
 
 .manage_users {
-  height: 50vh;
-  width: 100%;
   display: grid;
   grid-template: auto/auto auto;
   grid-template-areas: "u u o o" "r rc c c";
   -moz-column-gap: 10px;
        column-gap: 10px;
-  background-color: red;
+  row-gap: 10px;
+  margin: 1px;
 }
 
 .head_container {
@@ -10818,7 +10817,7 @@ a.text-dark:focus {
   background-color: white;
   grid-area: u;
   overflow: scroll;
-  height: 50vh;
+  height: 49vh;
 }
 
 .users_body {
@@ -10833,13 +10832,18 @@ a.text-dark:focus {
   margin-bottom: 0px;
 }
 
-.consumables_card {
+.consumables_card,
+.restaurants_card {
   display: flex;
   flex-direction: column;
   background-color: white;
   grid-area: o;
   overflow: scroll;
-  height: 50vh;
+  height: 49vh;
+}
+
+.restaurants_card {
+  grid-area: r;
 }
 
 .consumables_body {
@@ -10847,6 +10851,27 @@ a.text-dark:focus {
 }
 
 .consumables_body div table {
+  color: black;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.restaurants_card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  grid-area: r;
+  overflow: scroll;
+  height: 49vh;
+}
+
+.restaurants_body {
+  padding: 5px;
+}
+
+.restaurants_body div table {
   color: black;
 }
 

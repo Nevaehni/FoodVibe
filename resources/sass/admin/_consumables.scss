@@ -1,13 +1,17 @@
-.consumables_card
+.consumables_card, .restaurants_card
 {
     display: flex;
     flex-direction: column;
     background-color: white;
     grid-area: o;
     overflow: scroll;
-    height: 50vh;
+    height: 49vh;
 }
 
+.restaurants_card
+{
+    grid-area: r;
+}
 .consumables_body
 {
     padding: 5px;

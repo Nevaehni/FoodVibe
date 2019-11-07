@@ -1846,13 +1846,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 Vue.component('users-component', __webpack_require__(/*! ./Partials/UsersComponent.vue */ "./resources/js/components/Admin/Partials/UsersComponent.vue")["default"]);
 Vue.component('consumables-component', __webpack_require__(/*! ./Partials/ConsumablesComponent.vue */ "./resources/js/components/Admin/Partials/ConsumablesComponent.vue")["default"]);
+Vue.component('restaurants-component', __webpack_require__(/*! ./Partials/RestaurantsComponent.vue */ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue")["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       userKey: 0,
-      consumableKey: 0
+      consumableKey: 0,
+      restaurantKey: 0
     };
   },
   created: function created() {},
@@ -1862,6 +1865,9 @@ Vue.component('consumables-component', __webpack_require__(/*! ./Partials/Consum
     },
     consumableReRender: function consumableReRender() {
       this.consumableKey += 1;
+    },
+    restaurantReRender: function restaurantReRender() {
+      this.restaurantKey += 1;
     }
   }
 });
@@ -1993,7 +1999,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('consumables').then(function (response) {
+    axios.get('admin/consumables').then(function (response) {
       _this.consumables = response.data;
     })["catch"](function (err) {
       console.log('My error ' + err);
@@ -2002,7 +2008,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // delete consumable 
     deleteConsumable: function deleteConsumable(id) {
-      axios["delete"]('consumables/' + id).then(function (response) {
+      axios["delete"]('admin/consumables/' + id).then(function (response) {
         $('.consumable' + id).hide();
       });
       console.log('test');
@@ -2010,7 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
     // update consumable 
     updateConsumable: function updateConsumable(id) {
       var formData = $('.form_' + id).serializeArray();
-      axios.patch('consumables/' + id, {
+      axios.patch('admin/consumables/' + id, {
         id: id,
         title: formData[1].value,
         category: formData[2].value,
@@ -2025,13 +2031,243 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var formData = $('.form_new_consumable').serializeArray();
-      console.log(formData);
-      axios.post('consumables', {
+      axios.post('admin/consumables', {
         title: formData[0].value,
         category: formData[1].value,
         image: formData[2].value
       }).then(function (response) {
         _this2.$parent.consumableReRender();
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      restaurants: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('admin/restaurants').then(function (response) {
+      _this.restaurants = response.data;
+    })["catch"](function (err) {
+      console.log('My error ' + err);
+    });
+  },
+  methods: {
+    // delete restaurant 
+    deleteRestaurant: function deleteRestaurant(id) {
+      axios["delete"]('admin/restaurants/' + id).then(function (response) {
+        $('.restaurant' + id).hide();
+      });
+      console.log('test');
+    },
+    // update restaurant 
+    updateRestaurant: function updateRestaurant(id) {
+      var formData = $('.form_' + id).serializeArray();
+      axios.patch('admin/restaurants/' + id, {
+        id: id,
+        title: formData[1].value,
+        address: formData[2].value,
+        zipcode: formData[3].value,
+        image: formData[4].value,
+        city: formData[5].value,
+        phone: formData[6].value,
+        email: formData[7].value,
+        user_id: formData[8].value
+      }).then(function (response) {
+        $('.restaurant_id_' + id).html(response.data[0]);
+        $('.restaurant_name_' + id).html(response.data[1]);
+      });
+    },
+    // new restaurant 
+    newRestaurant: function newRestaurant() {
+      var _this2 = this;
+
+      var formData = $('.form_new_restaurant').serializeArray();
+      axios.post('admin/restaurants', {
+        title: formData[0].value,
+        address: formData[1].value,
+        zipcode: formData[2].value,
+        image: formData[3].value,
+        city: formData[4].value,
+        phone: formData[5].value,
+        email: formData[6].value,
+        user_id: formData[7].value
+      }).then(function (response) {
+        _this2.$parent.restaurantReRender();
       });
     }
   }
@@ -2214,7 +2450,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // get all users
-    axios.get('users').then(function (response) {
+    axios.get('admin/users').then(function (response) {
       _this.users = response.data;
     })["catch"](function (err) {
       console.log('My error ' + err);
@@ -2223,10 +2459,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // delete user 
     deleteUser: function deleteUser(id) {
-      axios["delete"]('users/' + id).then(function (response) {
+      axios["delete"]('admin/users/' + id).then(function (response) {
         $('.user' + id).hide();
       });
-      console.log('test');
     },
     // update user 
     updateUser: function updateUser(id) {
@@ -2251,8 +2486,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var formData = $('.form_new_user').serializeArray();
-      console.log(formData);
-      axios.post('users', {
+      axios.post('admin/users', {
         name: formData[0].value,
         address: formData[1].value,
         city: formData[2].value,
@@ -38910,7 +39144,9 @@ var render = function() {
     [
       _c("users-component", { key: _vm.userKey }),
       _vm._v(" "),
-      _c("consumables-component", { key: _vm.consumableKey })
+      _c("consumables-component", { key: _vm.consumableKey }),
+      _vm._v(" "),
+      _c("restaurants-component", { key: _vm.restaurantKey })
     ],
     1
   )
@@ -39316,6 +39552,588 @@ var staticRenderFns = [
               name: "consumable_image",
               id: "form_consumable_image",
               placeholder: "Enter new image file name"
+            }
+          })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "restaurants_card" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "restaurants_body",
+          staticStyle: { "background-color": "white" }
+        },
+        [
+          _c("div", { attrs: { id: "table" } }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered table-responsive-md table-striped text-center"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.restaurants, function(u, id) {
+                    return _c("tr", { key: id, class: "restaurant" + u.id }, [
+                      _c("td", { class: "restaurant_id_" + u.id }, [
+                        _vm._v(_vm._s(u.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { class: "restaurant_name_" + u.id }, [
+                        _vm._v(_vm._s(u.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-rounded edit_btn",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "modal",
+                              "data-target": "#restaurantModal" + u.id
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-danger btn-rounded remove_btn",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteRestaurant(u.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Remove")]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.restaurants, function(u, id) {
+        return _c(
+          "div",
+          {
+            key: id,
+            staticClass: "modal fade bd-example-modal-lg",
+            attrs: {
+              tabindex: "-1",
+              role: "dialog",
+              id: "restaurantModal" + u.id,
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-content",
+                    staticStyle: { "background-color": "white" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _vm._v("restaurants")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("form", { class: "form_" + u.id }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("ID")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_id" + u.id,
+                              id: "form_restaurant_id" + u.id,
+                              placeholder: "Enter new id"
+                            },
+                            domProps: { value: u.id }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Title")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_title" + u.id,
+                              id: "form_restaurant_title" + u.id,
+                              placeholder: "Enter new Title"
+                            },
+                            domProps: { value: u.title }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Address")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_address" + u.id,
+                              id: "form_restaurant_address" + u.id,
+                              placeholder: "Enter new Address"
+                            },
+                            domProps: { value: u.address }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Zipcode")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_zipcode" + u.id,
+                              id: "form_restaurant_zipcode" + u.id,
+                              placeholder: "Enter new Zipcode"
+                            },
+                            domProps: { value: u.zipcode }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("City name")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_city" + u.id,
+                              id: "form_restaurant_city" + u.id,
+                              placeholder: "Enter new City"
+                            },
+                            domProps: { value: u.city }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Phone name")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_phone" + u.id,
+                              id: "form_restaurant_phone" + u.id,
+                              placeholder: "Enter new Phone"
+                            },
+                            domProps: { value: u.phone }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Email name")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_email" + u.id,
+                              id: "form_restaurant_email" + u.id,
+                              placeholder: "Enter new Email"
+                            },
+                            domProps: { value: u.email }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Owner user id name")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_user_id" + u.id,
+                              id: "form_restaurant_user_id" + u.id,
+                              placeholder: "Enter new Owner user id"
+                            },
+                            domProps: { value: u.user_id }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "form_restaurant_id" } },
+                            [_vm._v("Image name")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              name: "restaurant_image" + u.id,
+                              id: "form_restaurant_image" + u.id,
+                              placeholder: "Change image file name"
+                            },
+                            domProps: { value: u.image }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            "data-dismiss": "modal",
+                            "aria-label": "Close"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.updateRestaurant(u.id)
+                            }
+                          }
+                        },
+                        [_vm._v("SAVE")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: {
+                            "data-dismiss": "modal",
+                            "aria-label": "Close"
+                          }
+                        },
+                        [_vm._v("BACK")]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade bd-example-modal-lg",
+          attrs: {
+            tabindex: "-1",
+            role: "dialog",
+            id: "newRestaurantModal",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-content",
+                  staticStyle: { "background-color": "white" }
+                },
+                [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _vm._v("New restaurant")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.newRestaurant()
+                          }
+                        }
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: {
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [_vm._v("BACK")]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "head_container" }, [
+      _c(
+        "span",
+        { staticClass: "text-center font-weight-bold text-uppercase" },
+        [_vm._v("restaurants list")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#newRestaurantModal"
+          }
+        },
+        [_vm._v("New restaurant")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Restaurant")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Options")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("form", { staticClass: "form_new_restaurant" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_title" } }, [
+            _vm._v("title")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_title",
+              id: "form_restaurant_title",
+              placeholder: "Enter new title"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_address" } }, [
+            _vm._v("address")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_address",
+              id: "form_restaurant_address",
+              placeholder: "Enter new address"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_zipcode" } }, [
+            _vm._v("zipcode")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_zipcode",
+              id: "form_restaurant_zipcode",
+              placeholder: "Enter new zipcode"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_image" } }, [
+            _vm._v("image")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_image",
+              id: "form_restaurant_image",
+              placeholder: "Enter new image"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_city" } }, [
+            _vm._v("city")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_city",
+              id: "form_restaurant_city",
+              placeholder: "Enter new city"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_phone" } }, [
+            _vm._v("phone")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_phone",
+              id: "form_restaurant_phone",
+              placeholder: "Enter new phone"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_email" } }, [
+            _vm._v("email")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_email",
+              id: "form_restaurant_email",
+              placeholder: "Enter new email"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "form_restaurant_user_id" } }, [
+            _vm._v("owner user id")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "restaurant_user_id",
+              id: "form_restaurant_user_id",
+              placeholder: "Enter new owner user id"
             }
           })
         ])
@@ -53165,6 +53983,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsumablesComponent_vue_vue_type_template_id_9df88922___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConsumablesComponent_vue_vue_type_template_id_9df88922___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Admin/Partials/RestaurantsComponent.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RestaurantsComponent.vue?vue&type=template&id=551422c9& */ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9&");
+/* harmony import */ var _RestaurantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RestaurantsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RestaurantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Admin/Partials/RestaurantsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RestaurantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RestaurantsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RestaurantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./RestaurantsComponent.vue?vue&type=template&id=551422c9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Partials/RestaurantsComponent.vue?vue&type=template&id=551422c9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RestaurantsComponent_vue_vue_type_template_id_551422c9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -165,7 +165,7 @@ export default {
     created()
     {
         // get all users
-        axios.get('users')
+        axios.get('admin/users')
         .then(response => 
         {
             this.users = response.data  
@@ -180,12 +180,11 @@ export default {
         // delete user 
         deleteUser(id)
         {
-            axios.delete('users/'+id)
+            axios.delete('admin/users/'+id)
             .then(response =>{
                 $('.user'+id).hide();                
             });   
-
-            console.log('test')
+            
         },
 
         // update user 
@@ -215,8 +214,7 @@ export default {
         {
             let formData = $('.form_new_user').serializeArray();
             
-            console.log(formData)
-            axios.post('users', {
+            axios.post('admin/users', {
                 name     :  formData[0].value,
                 address  :  formData[1].value,
                 city     :  formData[2].value,

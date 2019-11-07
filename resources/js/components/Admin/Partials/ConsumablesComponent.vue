@@ -115,7 +115,7 @@ export default {
     },
     created()
     {
-        axios.get('consumables')
+        axios.get('admin/consumables')
         .then(response => 
         {
             this.consumables = response.data  
@@ -131,7 +131,7 @@ export default {
         // delete consumable 
         deleteConsumable(id)
         {
-            axios.delete('consumables/'+id)
+            axios.delete('admin/consumables/'+id)
             .then(response =>{
                 $('.consumable'+id).hide();                
             });   
@@ -144,7 +144,7 @@ export default {
         {
             let formData = $('.form_'+id).serializeArray();
 
-            axios.patch('consumables/'+id, {
+            axios.patch('admin/consumables/'+id, {
                 id       :  id,
                 title     :  formData[1].value,
                 category  :  formData[2].value,
@@ -161,8 +161,7 @@ export default {
         {
             let formData = $('.form_new_consumable').serializeArray();
             
-            console.log(formData)
-            axios.post('consumables', {
+            axios.post('admin/consumables', {
                 title     :  formData[0].value,
                 category  :  formData[1].value,
                 image     :  formData[2].value,

@@ -1,13 +1,11 @@
 .manage_users 
 {
-    height: 50vh;
-    width: 100%;
     display: grid;
     grid-template: auto / auto auto;
     grid-template-areas: 
         "u u o o"
         "r rc c c";
     column-gap: 10px;
-
-    background-color: red;
+    row-gap: 10px;
+    margin: 1px;
 }
